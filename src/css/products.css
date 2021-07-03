@@ -1,0 +1,29 @@
+.products{
+
+}
+.products-item{
+
+    padding: 1rem;
+    text-align: center;
+    border-radius: 10px;
+   
+    margin: 1rem;
+    border-style: outset;
+}
+.products-item .products-itemImage{
+    object-fit: contain;
+    width: 17rem;
+    height: 17rem;
+    border-radius: 10px;
+
+}
+.products-item .icon-heart{
+    position: relative;
+    left: 6rem;
+    bottom: 16rem;
+  
+  
+}
+.products-item .products-itemButton{
+    width: 10rem;
+}

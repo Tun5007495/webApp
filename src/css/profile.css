@@ -1,0 +1,9 @@
+.profile .profile-avatar{
+    width:16rem;
+    height: 16rem;
+    border-radius: 8rem;
+}
+.profile{
+    background-color: white;
+    padding: 3rem;
+}
