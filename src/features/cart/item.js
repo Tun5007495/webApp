@@ -1,7 +1,8 @@
 import { Container, Row, Col, Button } from "reactstrap";
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from "reactstrap";
 
-const CartItem = () => {
+const CartItem = ({ item, onClickDelete, onClickSetCart, onClickReduce }) => {
+  console.log(item);
   return (
     <div className="cart-item">
       <Row>
@@ -9,38 +10,36 @@ const CartItem = () => {
           <div>
             <img
               className="cart-itemImage"
-              src="https://i.ibb.co/JpWst3h/trousers.png"
+              src={item.image}
               alt="products"
             ></img>
           </div>
         </Col>
         <Col md={4}>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-          </p>
+          <h6>{item.name}</h6>
         </Col>
-        <Col sm={{offset:2}}>
+        <Col sm={{ offset: 2 }}>
           <div>
-            <p className="cart-priceItem">₫6.030.000</p>
+            <p className="cart-priceItem">Price:{item.cost} ₫</p>
           </div>
         </Col>
         <Col>
           <div className="cart-itemGroup">
-            <div className="cart-itemGroupDecrease">-</div>
+            <div className="cart-itemGroupDecrease" onClick={onClickReduce}>-</div>
             <div className="cart-itemGroupCount">
-              <p>1</p>
+              <p>{item.count}</p>
             </div>
-            <div className="cart-itemGroupIncrease">+</div>
-          </div>
-        </Col>
-        <Col >
-          <div>
-            <p className="cart-priceItem">₫6.030.000</p>
+            <div className="cart-itemGroupIncrease" onClick={onClickSetCart}>+</div>
           </div>
         </Col>
         <Col>
           <div>
-            <Button className="cart-buttonItem" color="danger">
+            <p className="cart-priceItem">{item.count * item.cost} ₫</p>
+          </div>
+        </Col>
+        <Col>
+          <div>
+            <Button className="cart-buttonItem" color="danger" onClick={onClickDelete}>
               Xóa
             </Button>
           </div>

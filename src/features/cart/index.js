@@ -3,23 +3,16 @@ import cartEmpty from "../../assets/cartEmpty.png";
 import { Container, Row, Col, Button } from "reactstrap";
 import "../../css/cart.css";
 import CartEmpty from "./cartEmpty";
-import Cart from "./cart";
-import CartItem from "./cartItem";
+import Cart from "./order";
+import Items from "./items";
+import { useSelector } from "react-redux";
 const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const CartIndex = () => {
-  const [show, setShow] = useState(true);
+  const count = useSelector((state) => state.cart.count);
+  console.log(count);
   return (
     <Container className="content">
-      {show === true ? (
-        <div>
-          {arr.map((item) => (
-            <CartItem></CartItem>
-          ))}
-          <Cart></Cart>
-        </div>
-      ) : (
-        <CartEmpty />
-      )}
+      {count > 0 ? <Items/> : <CartEmpty />}
     </Container>
   );
 };

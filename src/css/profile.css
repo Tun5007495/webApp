@@ -7,3 +7,9 @@
     background-color: white;
     padding: 3rem;
 }
+.profile .profile-buttonLogout{
+    width: 10rem;
+    background-color: orangered;
+    margin-top: 3rem;
+    margin-left: 3rem;
+}

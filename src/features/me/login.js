@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Form,
@@ -9,8 +9,17 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { useDispatch } from "react-redux";
+
+import { signIn } from "../../redux/auth";
 import logo from "../../assets/logo192.png";
 const Login = (props) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const submit = (infor) => {
+    dispatch(signIn(infor));
+  };
   return (
     <Container className="content">
       <Row>
@@ -33,6 +42,7 @@ const Login = (props) => {
                   name="email"
                   id="exampleEmail"
                   placeholder="Email"
+                  onChange={(event) => setUsername(event.target.value)}
                 />
               </FormGroup>{" "}
               <FormGroup>
@@ -42,10 +52,11 @@ const Login = (props) => {
                   name="password"
                   id="examplePassword"
                   placeholder="Password"
+                  onChange={(event) => setPassword(event.target.value)}
                 />
               </FormGroup>
               <p className="login-forgotPassword">Forgot your password?</p>
-              <Button>
+              <Button onClick={() => submit({ username, password })}>
                 {" "}
                 <b>Log in</b>
               </Button>

@@ -1,30 +1,26 @@
 import React from "react";
-import {
-  Card,
-  CardImg,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
-} from "reactstrap";
-
+import { Button } from "reactstrap";
+import { Link } from "react-router-dom";
 import "../../css/products.css";
-const Example = (props) => {
-  const num = props.number;
+const Example = ({ item }) => {
+ 
   return (
     <div className="products-item">
-      <img
-        className="products-itemImage"
-        src="https://picsum.photos/400/400"
-        alt="item"
-      ></img>
+      <img className="products-itemImage" src={item.image} alt="item"></img>
       <div className="icon-heart">
         <i class="fab fa-gratipay"></i>
       </div>
-
-      <p>Cost: $5</p>
-      <div >
-        <Button className="products-itemButton" >Buy</Button>
+      <h4>{item.name}</h4>
+      <p>Cost: ${item.cost}</p>
+      <div>
+        <Link
+          to={{
+            pathname: "/detail",
+            state: item// your data array of objects
+          }}
+        >
+          <Button className="products-itemButton">Buy</Button>
+        </Link>
       </div>
     </div>
   );

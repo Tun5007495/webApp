@@ -12,7 +12,14 @@ import {
 import avatar from "../../assets/avatar.jpg";
 import Avatar, { ConfigProvider } from "react-avatar";
 import "../../css/profile.css";
+
+import {signOut} from '../../redux/auth';
+import {useDispatch} from 'react-redux'
 const Login = (props) => {
+  const dispatch = useDispatch();
+  const logout = ()=>{
+    dispatch(signOut());
+  }
   return (
     <Container className="content">
       <div className="profile">
@@ -35,6 +42,7 @@ const Login = (props) => {
               {" "}
               <i class="fas fa-map-marker-alt"></i> Binh Dinh
             </p>
+            <Button onClick={()=>logout()} className="profile-buttonLogout"><h6>Logout</h6></Button>
           </Col>
         </Row>
       </div>

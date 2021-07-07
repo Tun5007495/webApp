@@ -1,29 +1,90 @@
-.products{
-
+.products {
 }
-.products-item{
+.products-item {
+  padding: 1rem;
+  text-align: center;
+  border-radius: 10px;
 
+  margin: 1rem;
+  border-style: outset;
+}
+.products-item .products-itemImage {
+  object-fit: contain;
+  width: 17rem;
+  height: 17rem;
+  border-radius: 10px;
+}
+.products-item .icon-heart {
+  position: relative;
+  left: 6rem;
+  bottom: 16rem;
+}
+.products-item .products-itemButton {
+  width: 10rem;
+}
+.product-detailImage {
+  width: 25rem;
+  height: 25rem;
+  object-fit: contain;
+}
+.product-buttonGroup {
+  align-items: center;
+  text-align: center;
+  text-align: center;
+}
+
+.product-detailBorderCount {
+  margin-top: 10rem;
+  margin-bottom: 2rem;
+}
+
+.p {
+  border: 1px solid black;
+  height: 2rem;
+}
+.p-reduce {
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-radius: 5px 0px 0px 5px;
+  height: 2rem;
+}
+.p-increase {
+  height: 2rem;
+  border-radius: 0px 5px 5px 0px;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.products-detailBuy {
+  background-color: orangered;
+  width: 8rem;
+  height: 3rem;
+}
+.products-detailAddToCart {
+  background-color: rgb(238, 219, 200);
+  border: red solid 1px;
+  color: red;
+  height: 3rem;
+  margin-right: 2rem;
+}
+.product-detail {
+  padding: 1rem;
+  text-align: center;
+  border-radius: 10px;
+  margin: 1rem;
+  border-style: outset;
+  background-color: white;
+}
+.product-describe {
     padding: 1rem;
-    text-align: center;
     border-radius: 10px;
-   
     margin: 1rem;
     border-style: outset;
-}
-.products-item .products-itemImage{
-    object-fit: contain;
-    width: 17rem;
-    height: 17rem;
-    border-radius: 10px;
-
-}
-.products-item .icon-heart{
-    position: relative;
-    left: 6rem;
-    bottom: 16rem;
-  
-  
-}
-.products-item .products-itemButton{
-    width: 10rem;
-}
+    background-color: white;
+  }
+  .p-Button{
+    border: none;
+   background-color: white;
+   
+  }

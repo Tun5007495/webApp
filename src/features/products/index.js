@@ -1,22 +1,39 @@
-import Item from "./item";
-import '../../css/content.css'
-import { Container, Row, Col } from "reactstrap";
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+import Items from "./items";
+import "../../css/content.css";
+import { Container, Col, Row } from "reactstrap";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useRouteMatch,
+} from "react-router-dom";
+import Detail from "./itemDetail";
+import { fetchData, setStatusProducts } from "../../redux/products";
+import { loadData } from "../../redux/cart";
+import React, { useEffect, useState, useLayoutEffect } from "react";
+import { useDispatch} from "react-redux";
 
-const home = () => {
+
+const Home = () => {
+ const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchData());
+    dispatch(loadData());
+    }, [dispatch]);
   return (
     <Container>
-      <div className="content">
-        <Row>
-          {arr.map((item) => (
-            <Col md={6} lg={4}>
-              <Item number={item}></Item>
-            </Col>
-          ))}
-        </Row>
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Items></Items>
+          </Route>
+          <Route exact path="/detail">
+            <Detail></Detail>
+          </Route>
+        </Switch>
+      </Router>
     </Container>
   );
 };
 
-export default home;
+export default Home;
