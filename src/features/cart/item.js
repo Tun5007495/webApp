@@ -1,8 +1,5 @@
-import { Container, Row, Col, Button } from "reactstrap";
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from "reactstrap";
-
+import { Row, Col, Button } from "reactstrap";
 const CartItem = ({ item, onClickDelete, onClickSetCart, onClickReduce }) => {
-  console.log(item);
   return (
     <div className="cart-item">
       <Row>
@@ -25,11 +22,15 @@ const CartItem = ({ item, onClickDelete, onClickSetCart, onClickReduce }) => {
         </Col>
         <Col>
           <div className="cart-itemGroup">
-            <div className="cart-itemGroupDecrease" onClick={onClickReduce}>-</div>
+            <div className="cart-itemGroupDecrease" onClick={onClickReduce}>
+              -
+            </div>
             <div className="cart-itemGroupCount">
               <p>{item.count}</p>
             </div>
-            <div className="cart-itemGroupIncrease" onClick={onClickSetCart}>+</div>
+            <div className="cart-itemGroupIncrease" onClick={onClickSetCart}>
+              +
+            </div>
           </div>
         </Col>
         <Col>
@@ -39,7 +40,11 @@ const CartItem = ({ item, onClickDelete, onClickSetCart, onClickReduce }) => {
         </Col>
         <Col>
           <div>
-            <Button className="cart-buttonItem" color="danger" onClick={onClickDelete}>
+            <Button
+              className="cart-buttonItem"
+              color="danger"
+              onClick={onClickDelete}
+            >
               Xóa
             </Button>
           </div>

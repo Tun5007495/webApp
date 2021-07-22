@@ -1,21 +1,18 @@
 import React from "react";
 import {
   Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
+ 
   Container,
   Row,
   Col,
 } from "reactstrap";
 import avatar from "../../assets/avatar.jpg";
-import Avatar, { ConfigProvider } from "react-avatar";
+
 import "../../css/profile.css";
 
 import {signOut} from '../../redux/auth';
 import {useDispatch} from 'react-redux'
-const Login = (props) => {
+const Login = () => {
   const dispatch = useDispatch();
   const logout = ()=>{
     dispatch(signOut());

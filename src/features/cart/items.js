@@ -6,7 +6,7 @@ import "../../css/cart.css";
 import Order from "./order";
 import CartItem from "./item";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteItem, setCart, reduceItem } from "../../redux/cart";
+import { deleteItem, raiseCart, reduceItem } from "../../redux/cart";
 const CartIndex = () => {
     const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items);
@@ -15,7 +15,7 @@ const CartIndex = () => {
     dispatch(deleteItem(id));
   };
   const addItem = (item) => {
-    dispatch(setCart(item));
+    dispatch(raiseCart(item));
   };
   const reduce = (id) => {
     dispatch(reduceItem(id));

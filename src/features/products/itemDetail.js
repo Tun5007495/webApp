@@ -6,14 +6,23 @@ import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import { setCartCount } from "../../redux/cart";
 const DetailProduct = ({ state }) => {
-  const location = useLocation();
-  const item = location.state;
-  const [count, setCount] = useState(0);
   const dispatch = useDispatch();
-  const addItem = () => {
-    item.count = count;
-    dispatch(setCartCount(item));
-    setCount(0);
+  const location = useLocation();
+  let item = {...location.state};
+  const [count, setCount] = useState(0);
+
+  let addItem = () => {
+    if(count){
+     
+     item.count = count;
+
+      dispatch(setCartCount(item));
+      setCount(0);
+    }
+    else{
+      console.log('11');
+    }
+
   };
   return (
     <div className="content">

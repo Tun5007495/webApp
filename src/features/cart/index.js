@@ -1,15 +1,33 @@
-import React, { useState } from "react";
-import cartEmpty from "../../assets/cartEmpty.png";
-import { Container, Row, Col, Button } from "reactstrap";
+import React,{useEffect} from "react";
+
+import { Container} from "reactstrap";
 import "../../css/cart.css";
 import CartEmpty from "./cartEmpty";
-import Cart from "./order";
+
 import Items from "./items";
-import { useSelector } from "react-redux";
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+import { useSelector, useDispatch } from "react-redux";
+import cartApi from '../../api/cartApi'
+import {setCartData} from "../../redux/cart"
 const CartIndex = () => {
   const count = useSelector((state) => state.cart.count);
-  console.log(count);
+  const dispatch = useDispatch();
+  useEffect(() => {
+  
+    const fetchCartList = async () => {
+      try {
+        // const params = { _page: 1, _limit: 10 };
+        const response = await cartApi.getAll();
+        
+        dispatch(setCartData(response));
+       console.log("Fetch products successfully: ", response);
+     
+      } catch (error) {
+        console.log("Failed to fetch product list: ", error);
+      }
+    };
+    fetchCartList();
+  }, [dispatch]);
+
   return (
     <Container className="content">
       {count > 0 ? <Items/> : <CartEmpty />}

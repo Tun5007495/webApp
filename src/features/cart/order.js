@@ -1,5 +1,5 @@
-import { Container, Row, Col, Button } from "reactstrap";
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from "reactstrap";
+import {  Row, Col, Button } from "reactstrap";
+
 import {useSelector} from "react-redux";
 const Cart = () => {
   const count = useSelector((state) => state.cart.count);

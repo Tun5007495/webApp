@@ -1,25 +1,35 @@
 import Items from "./items";
 import "../../css/content.css";
-import { Container, Col, Row } from "reactstrap";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useRouteMatch,
-} from "react-router-dom";
+import axios from "axios";
+import { Container } from "reactstrap";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Detail from "./itemDetail";
-import { fetchData, setStatusProducts } from "../../redux/products";
+import { setData } from "../../redux/products";
 import { loadData } from "../../redux/cart";
-import React, { useEffect, useState, useLayoutEffect } from "react";
-import { useDispatch} from "react-redux";
-
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import productApi from "../../api/productApi";
 
 const Home = () => {
- const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(fetchData());
-    dispatch(loadData());
-    }, [dispatch]);
+  
+    const fetchProductList = async () => {
+      try {
+        // const params = { _page: 1, _limit: 10 };
+        const response = await productApi.getAll();
+        
+        dispatch(setData(response));
+       // console.log("Fetch products successfully: ", response.data);
+     
+      } catch (error) {
+        console.log("Failed to fetch product list: ", error);
+      }
+    };
+    fetchProductList();
+  }, [dispatch]);
+
   return (
     <Container>
       <Router>
