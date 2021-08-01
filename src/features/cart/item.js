@@ -1,4 +1,4 @@
-import { Row, Col, Button } from "reactstrap";
+import { Button, Col, Row } from "reactstrap";
 const CartItem = ({ item, onClickDelete, onClickSetCart, onClickReduce }) => {
   return (
     <div className="cart-item">

@@ -1,24 +1,48 @@
+import firebase from 'firebase';
 import React, { useState } from "react";
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import { useDispatch } from "react-redux";
 import {
   Button,
+  Col,
+  Container,
   Form,
   FormGroup,
-  Label,
   Input,
-  Container,
-  Row,
-  Col,
+  Label,
+  Row
 } from "reactstrap";
-import { useDispatch } from "react-redux";
-
-import { signIn } from "../../redux/auth";
 import logo from "../../assets/logo192.png";
+import { signIn } from "../../redux/auth";
+import loginApi from '../../api/loginApi'
+const uiConfig = {
+  // Popup signin flow rather than redirect flow.
+  signInFlow: 'redirect',
+  signInSuccessUrl: '/',
+  // We will display Google and Facebook as auth providers.
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    //firebase.auth.FacebookAuthProvider.PROVIDER_ID
+  ],
+ 
+};
 const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const submit = (infor) => {
-    dispatch(signIn(infor));
+  const submit = async (infor) => {
+    console.log(infor);
+    try {
+      // const params = { _page: 1, _limit: 10 };
+      const request = await loginApi.postUser(infor);
+     console.log(request);
+      //dispatch(setData(response));
+     // console.log("Fetch products successfully: ", response.data);
+   
+    } catch (error) {
+      console.log("Failed to login: ", error);
+    }
+    //dispatch(signIn(infor));
   };
   return (
     <Container className="content">
@@ -60,6 +84,7 @@ const Login = (props) => {
                 {" "}
                 <b>Log in</b>
               </Button>
+              <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </Form>
           </div>
         </Col>

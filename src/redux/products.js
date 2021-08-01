@@ -73,7 +73,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   products: [],
-  categoris: [],
+  //categoris: [],
 };
 
 const productsSlice = createSlice({
@@ -81,8 +81,8 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     setData(state, action) {
-      state.products = action.payload.products;
-      state.categoris = action.payload.categoris;
+      state.products = action.payload;
+     // state.categoris = action.payload.categoris;
     },
     setStatusProducts(state, action) {
       const index = state.products.findIndex(

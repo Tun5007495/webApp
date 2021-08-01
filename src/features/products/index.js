@@ -1,14 +1,12 @@
-import Items from "./items";
-import "../../css/content.css";
-import axios from "axios";
-import { Container } from "reactstrap";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Detail from "./itemDetail";
-import { setData } from "../../redux/products";
-import { loadData } from "../../redux/cart";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Container } from "reactstrap";
 import productApi from "../../api/productApi";
+import "../../css/content.css";
+import { setData } from "../../redux/products";
+import Detail from "./itemDetail";
+import Items from "./items";
 
 const Home = () => {
   const dispatch = useDispatch();

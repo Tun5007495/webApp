@@ -1,23 +1,16 @@
-import Item from "./item";
+import { useSelector } from "react-redux";
+import { Col, Row } from "reactstrap";
 import "../../css/content.css";
-import {  Col, Row } from "reactstrap";
-
-
-import {useSelector, useDispatch} from "react-redux";
-
-
-
+import Item from "./item";
 
 const Items = () => {
-
   const products = useSelector((state) => state.products.products);
- 
- 
+
   return (
     <div className="content">
       <Row>
         {products.map((item) => (
-          <Col md={6} lg={4}>
+          <Col key={item.id} md={6} lg={4}>
             <Item item={item}></Item>
           </Col>
         ))}

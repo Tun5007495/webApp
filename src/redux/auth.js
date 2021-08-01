@@ -9,13 +9,11 @@ const setData = async (data) =>
       console.log(error);
     });
 let initState = {
-
-    username: "",
-    password: "",
-    name: "",
-    cart: {},
-    signin: false,
-
+  username: "",
+  password: "",
+  name: "",
+  cart: {},
+  signin: false,
 };
 //action
 export const loadData = () => async (dispatch) => {

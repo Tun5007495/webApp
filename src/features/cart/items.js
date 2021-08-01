@@ -1,14 +1,12 @@
-import React, {useEffect} from "react";
-
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "../../css/cart.css";
-
-import Order from "./order";
-import CartItem from "./item";
-import { useSelector, useDispatch } from "react-redux";
 import { deleteItem, raiseCart, reduceItem } from "../../redux/cart";
+import CartItem from "./item";
+import Order from "./order";
+
 const CartIndex = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items);
   useEffect(() => {}, [items]);
   const deleteI = (id) => {
@@ -22,19 +20,18 @@ const CartIndex = () => {
   };
 
   return (
-   
-      <div>
-        {items.map((item) => (
-          <CartItem item={item}
+    <div>
+      {items.map((item) => (
+        <CartItem
+          key={item.id}
+          item={item}
           onClickDelete={() => deleteI(item.id)}
           onClickSetCart={() => addItem(item)}
           onClickReduce={() => reduce(item.id)}
-
-          ></CartItem>
-        ))}
-        <Order></Order>
-      </div>
-  
+        ></CartItem>
+      ))}
+      <Order></Order>
+    </div>
   );
 };
 

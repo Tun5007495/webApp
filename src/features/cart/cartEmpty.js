@@ -1,5 +1,5 @@
+import { Button, Col, Row } from "reactstrap";
 import cartEmpty from "../../assets/cartEmpty.png";
-import {  Row, Col, Button } from "reactstrap";
 
 const CartEmpty = () => {
   return (

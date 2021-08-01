@@ -1,22 +1,15 @@
 import React from "react";
-import {
-  Button,
- 
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
+import { useDispatch } from "react-redux";
+import { Button, Col, Container, Row } from "reactstrap";
 import avatar from "../../assets/avatar.jpg";
-
 import "../../css/profile.css";
+import { signOut } from "../../redux/auth";
 
-import {signOut} from '../../redux/auth';
-import {useDispatch} from 'react-redux'
 const Login = () => {
   const dispatch = useDispatch();
-  const logout = ()=>{
+  const logout = () => {
     dispatch(signOut());
-  }
+  };
   return (
     <Container className="content">
       <div className="profile">
@@ -37,9 +30,11 @@ const Login = () => {
             <p>Student</p>
             <p>
               {" "}
-              <i class="fas fa-map-marker-alt"></i> Binh Dinh
+              <i className="fas fa-map-marker-alt"></i> Binh Dinh
             </p>
-            <Button onClick={()=>logout()} className="profile-buttonLogout"><h6>Logout</h6></Button>
+            <Button onClick={() => logout()} className="profile-buttonLogout">
+              <h6>Logout</h6>
+            </Button>
           </Col>
         </Row>
       </div>

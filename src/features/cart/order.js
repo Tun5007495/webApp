@@ -1,10 +1,10 @@
-import {  Row, Col, Button } from "reactstrap";
+import { useSelector } from "react-redux";
+import { Button, Col, Row } from "reactstrap";
 
-import {useSelector} from "react-redux";
 const Cart = () => {
   const count = useSelector((state) => state.cart.count);
   const total = useSelector((state) => state.cart.total);
-  
+
   return (
     <div className="cart-order">
       <Row>
@@ -19,8 +19,10 @@ const Cart = () => {
           </div>
         </Col>
         <Col>
-          <div >
-            <Button className="cart-buttonBuy" color="danger">Mua Hàng</Button>
+          <div>
+            <Button className="cart-buttonBuy" color="danger">
+              Mua Hàng
+            </Button>
           </div>
         </Col>
       </Row>

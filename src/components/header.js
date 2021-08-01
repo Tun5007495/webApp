@@ -13,7 +13,7 @@ const Example = (props) => {
         <Col md={{ size: 1, offset: 2 }}>
           <div className="header-item">
             <div>
-              <i class="fas fa-home"></i>
+              <i className="fas fa-home"></i>
             </div>
             <div>
               <Link to="/">Home</Link>
@@ -23,7 +23,7 @@ const Example = (props) => {
         <Col md={{ size: 1 }}>
           <div className="header-item">
             <div>
-              <i class="fas fa-heart"></i>
+              <i className="fas fa-heart"></i>
             </div>
 
             <Link to="wishlist">Wishlist</Link>
@@ -32,7 +32,7 @@ const Example = (props) => {
         <Col md={{ size: 1 }}>
           <div className="header-item">
             <div>
-              <i class="fas fa-shopping-cart"></i>
+              <i className="fas fa-shopping-cart"></i>
             </div>
             <Link to="/cart">Cart</Link>
           </div>
@@ -40,7 +40,7 @@ const Example = (props) => {
         <Col md={{ size: 1 }}>
           <div className="header-item">
             <div>
-              <i class="fas fa-user-alt"></i>
+              <i className="fas fa-user-alt"></i>
             </div>
             <Link to="/me">Me</Link>
           </div>
