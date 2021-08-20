@@ -1,5 +1,8 @@
 import { Button, Col, Row } from "reactstrap";
-const CartItem = ({ item, onClickDelete, onClickSetCart, onClickReduce }) => {
+import React from 'react'
+
+const CartItem = (Props) => {
+const { item, onClickDelete, onClickSetCart, onClickReduce } = Props;
   return (
     <div className="cart-item">
       <Row>
@@ -22,15 +25,20 @@ const CartItem = ({ item, onClickDelete, onClickSetCart, onClickReduce }) => {
         </Col>
         <Col>
           <div className="cart-itemGroup">
-            <div className="cart-itemGroupDecrease" onClick={onClickReduce}>
-              -
-            </div>
+           
+              <button  className="cart-itemGroupDecrease" onClick={onClickReduce}>
+                -
+              </button>
+        
             <div className="cart-itemGroupCount">
               <p>{item.count}</p>
             </div>
-            <div className="cart-itemGroupIncrease" onClick={onClickSetCart}>
-              +
-            </div>
+        
+              <button className="cart-itemGroupIncrease" onClick={onClickSetCart}>
+                +
+              </button>
+              
+        
           </div>
         </Col>
         <Col>

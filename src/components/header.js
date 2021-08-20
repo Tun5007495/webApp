@@ -1,9 +1,11 @@
 import React from "react";
 import {  Col, Row } from "reactstrap";
+//import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+
 import { Link } from "react-router-dom";
 import "../css/header.css";
 import Logo from "../assets/logo192.png";
-const Example = (props) => {
+const Example = () => {
   return (
     <div className="header">
       <Row>
@@ -42,7 +44,7 @@ const Example = (props) => {
             <div>
               <i className="fas fa-user-alt"></i>
             </div>
-            <Link to="/me">Me</Link>
+            <Link to="/signin">Me</Link>
           </div>
         </Col>
         <hr></hr>

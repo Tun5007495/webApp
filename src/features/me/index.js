@@ -1,17 +1,14 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import "../../css/me.css";
-import { loadData } from "../../redux/auth";
-import Login from "./login";
+//import { loadData } from "../../redux/auth";
+import Login from "./signin";
 import Profile from "./profile";
 
 const Me = () => {
-  const dispatch = useDispatch();
-  const sign = useSelector((state) => state.auth.signin);
-  useEffect(() => {
-    dispatch(loadData());
-  }, [dispatch]);
-
+ // const dispatch = useDispatch();
+  const sign = useSelector((state) => state.auth.userInfor);
+  
   return <div>{sign === false ? <Login></Login> : <Profile></Profile>}</div>;
 };
 

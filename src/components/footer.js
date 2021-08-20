@@ -3,7 +3,7 @@ import { Row, Col, Container, Button } from "reactstrap";
 import "../css/footer.css";
 import PhotoAndroid from "../assets/imageFooter/logo-chplay.png";
 import PhotoIos from "../assets/imageFooter/logo-appStore.png";
-const Example = (props) => {
+const Example = () => {
   return (
     <div className="footer">
       <Container>

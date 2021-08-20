@@ -12,15 +12,13 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-  
     const fetchProductList = async () => {
       try {
         // const params = { _page: 1, _limit: 10 };
         const response = await productApi.getAll();
-        
+
         dispatch(setData(response));
-       // console.log("Fetch products successfully: ", response.data);
-     
+        // console.log("Fetch products successfully: ", response.data);
       } catch (error) {
         console.log("Failed to fetch product list: ", error);
       }
@@ -35,7 +33,7 @@ const Home = () => {
           <Route exact path="/">
             <Items></Items>
           </Route>
-          <Route exact path="/detail">
+          <Route exact path="/product">
             <Detail></Detail>
           </Route>
         </Switch>

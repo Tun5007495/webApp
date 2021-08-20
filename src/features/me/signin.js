@@ -1,7 +1,7 @@
-import firebase from 'firebase';
-import React, { useState } from "react";
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { useDispatch } from "react-redux";
+import firebase from "firebase";
+import React, { useState, useEffect } from "react";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Button,
   Col,
@@ -10,35 +10,56 @@ import {
   FormGroup,
   Input,
   Label,
-  Row
+  Row,
 } from "reactstrap";
 import logo from "../../assets/logo192.png";
 import { signIn } from "../../redux/auth";
-import loginApi from '../../api/loginApi'
+import loginApi from "../../api/loginApi";
 const uiConfig = {
   // Popup signin flow rather than redirect flow.
-  signInFlow: 'redirect',
-  signInSuccessUrl: '/',
+  signInFlow: "redirect",
+  signInSuccessUrl: "/",
   // We will display Google and Facebook as auth providers.
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     //firebase.auth.FacebookAuthProvider.PROVIDER_ID
   ],
- 
 };
-const Login = (props) => {
+const Signin = (Props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const redirect = Props.location.search
+    ? Props.location.search.split("=")[1]
+    : "/profile";
+
+  const userInfor = useSelector((state) => state.auth.userInfor);
+
+  useEffect(() => {
+    if (userInfor) {
+      Props.history.push(redirect);
+    }
+  }, [Props.history, redirect, userInfor]);
+  //const { userInfor } = userSignin;
+  // useEffect(() => {
+  //   if (userInfor) {
+  //     Props.history.push(redirect);
+  //   }
+  // }, [Props.history, redirect, userInfor]);
+
   const submit = async (infor) => {
-    console.log(infor);
     try {
       // const params = { _page: 1, _limit: 10 };
-      const request = await loginApi.postUser(infor);
-     console.log(request);
-      //dispatch(setData(response));
-     // console.log("Fetch products successfully: ", response.data);
-   
+      const data = await loginApi.postUser(infor);
+
+      localStorage.setItem("userInfor", JSON.stringify(data));
+      //console.log(localStorage.getItem('userInfor'));
+
+      if (data) {
+        dispatch(signIn());
+      }
+
+      // console.log("Fetch products successfully: ", response.data);
     } catch (error) {
       console.log("Failed to login: ", error);
     }
@@ -84,7 +105,10 @@ const Login = (props) => {
                 {" "}
                 <b>Log in</b>
               </Button>
-              <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+              <StyledFirebaseAuth
+                uiConfig={uiConfig}
+                firebaseAuth={firebase.auth()}
+              />
             </Form>
           </div>
         </Col>
@@ -93,4 +117,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default Signin;

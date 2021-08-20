@@ -1,12 +1,20 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Col, Container, Row } from "reactstrap";
 import avatar from "../../assets/avatar.jpg";
 import "../../css/profile.css";
+
 import { signOut } from "../../redux/auth";
 
-const Login = () => {
+const Login = (Props) => {
   const dispatch = useDispatch();
+  const userInfor = useSelector((state) => state.auth.userInfor);
+
+  useEffect(() => {
+    if (!userInfor) {
+      Props.history.push("/signin");
+    }
+  }, [Props.history, userInfor]);
   const logout = () => {
     dispatch(signOut());
   };

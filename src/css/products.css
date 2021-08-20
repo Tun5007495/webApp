@@ -77,14 +77,58 @@
   background-color: white;
 }
 .product-describe {
-    padding: 1rem;
-    border-radius: 10px;
-    margin: 1rem;
-    border-style: outset;
-    background-color: white;
-  }
-  .p-Button{
-    border: none;
-   background-color: white;
-   
-  }
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem;
+  border-style: outset;
+  background-color: white;
+}
+.product-comment {
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem;
+  border-style: outset;
+  background-color: white;
+}
+.p-Button {
+  border: none;
+  background-color: white;
+}
+.product-comment .comment-guest {
+  margin: 2rem 0 2rem 0;
+}
+.product-comment .comment-infor {
+  text-align: center;
+}
+.product-comment .comment-title {
+  width: 10rem;
+}
+.product-comment .comment-input {
+  width: 90%;
+  height: auto;
+  padding: 1rem;
+  border: 0px;
+  border-bottom: 1px solid;
+  outline: none;
+  overflow: hidden;
+  justify-content: end;
+  align-items: end;
+  resize: both;
+}
+.product-comment .comment-buttonSubmit {
+  width: 7rem;
+  height: 3rem;
+  border: 1px solid grey;
+  background-color: hsl(39, 100%, 50%);
+  margin-left: 1rem;
+}
+.product-comment .comment-form {
+  width: 100%;
+  margin-left: 2rem;
+}
+.product-comment .usercomment {
+  align-items: center;
+  justify-content: center;
+}
+.product-comment .usercomment-avatar {
+}

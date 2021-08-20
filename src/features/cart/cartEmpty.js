@@ -1,7 +1,12 @@
+import React from "react";
 import { Button, Col, Row } from "reactstrap";
 import cartEmpty from "../../assets/cartEmpty.png";
-
-const CartEmpty = () => {
+import { withRouter } from "react-router-dom";
+const CartEmpty = (Props) => {
+  const handleBuy = (e) => {
+    e.preventDefault();
+    Props.history.push("/");
+  };
   return (
     <div className="cart-empty">
       <Row>
@@ -15,7 +20,9 @@ const CartEmpty = () => {
             <b>Giỏ hàng của bạn còn trống!</b>
           </div>
           <div className="cart-buttonEmpty">
-            <Button color="danger">MUA NGAY</Button>
+            <Button color="danger" onClick={handleBuy}>
+              MUA NGAY
+            </Button>
           </div>
         </Col>
       </Row>
@@ -23,4 +30,4 @@ const CartEmpty = () => {
   );
 };
 
-export default CartEmpty;
+export default withRouter(CartEmpty);

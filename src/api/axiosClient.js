@@ -1,39 +1,39 @@
 // api/axiosClient.js
 import axios from "axios";
 import queryString from "query-string";
-import firebase from 'firebase';
+//import firebase from 'firebase';
 // Set up default config for http requests here
 
 // Please have a look at here `https://github.com/axios/axios#request-
 //config` for the full list of configs
-const getFirebaseToken = async () => {
-  const currentUser = firebase.auth().currentUser;
-  if(currentUser){
-    return currentUser.getIdToken();
-  }
+// const getFirebaseToken = async () => {
+//   const currentUser = firebase.auth().currentUser;
+//   if(currentUser){
+//     return currentUser.getIdToken();
+//   }
 
-  //
+//   //
 
-  return new Promise((resolve,reject)=>{
-    const waitTimer = setTimeout(() => {
-      reject(null);
+//   return new Promise((resolve,reject)=>{
+//     const waitTimer = setTimeout(() => {
+//       reject(null);
       
-    },10000);
-    const unregisterAuthObserver = firebase.auth().onAuthStateChanged( async(user) => {
-      if(!user){
-        reject(null);
-      }
-      console.log("loggin username ",user);
-      const token = await user.getIdToken();
-      console.log("[axios]loggin token : ",token);
-      resolve(token);
-      unregisterAuthObserver();
-      clearTimeout(waitTimer);
-    });
+//     },10000);
+//     const unregisterAuthObserver = firebase.auth().onAuthStateChanged( async(user) => {
+//       if(!user){
+//         reject(null);
+//       }
+//       console.log("loggin username ",user);
+//       const token = await user.getIdToken();
+//       console.log("[axios]loggin token : ",token);
+//       resolve(token);
+//       unregisterAuthObserver();
+//       clearTimeout(waitTimer);
+//     });
   
 
-  })
-};
+//   })
+// };
 const axiosClient = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   headers: {

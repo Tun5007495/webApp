@@ -177,47 +177,69 @@
 
 // export default reducer;
 import { createSlice } from "@reduxjs/toolkit";
+//import { act } from "react-dom/cjs/react-dom-test-utils.production.min";
 
 const initialState = {
-  items: [],
-  total: 0,
-  count: 0,
+  cartItems: [],
+  shippingAddress: {
+    fullname: null,
+    address: null,
+    city: null,
+    country: null,
+    postalCode: null,
+  },
+  paymentMethod: null,
 };
 
 const cartSlice = createSlice({
   name: "cartRedux",
   initialState,
   reducers: {
-    setCartData(state, action) {
+    setShippingAddress(state, action) {
       // if(action.payload.count){
       //   state = {...action.payload};
       // }
-     
-      if(action.payload.count){
-        state.count = action.payload.count;
-        state.total = action.payload.total;
-        state.items = action.payload.items;
-
-      }
       
+      state.shippingAddress.fullname = action.payload.fullname;
+      state.shippingAddress.address = action.payload.address;
+      state.shippingAddress.city = action.payload.city;
+      state.shippingAddress.country = action.payload.country;
+      state.shippingAddress.postalCode = action.payload.postalCode;
     },
-    reduceItem(state, action) {
-      const index = state.items.findIndex((item) => item.id === action.payload);
-      if (state.items[index].count === 1) {
-        state.count--;
-        state.total -= state.items[index].cost;
-        state.items.splice(index, 1);
-        // setData({ ...state, items: arr });
+    setPaymentMethod(state, action) {
+      state.paymentMethod = action.payload.paymentMethod;
+    },
+    reduceItem( state,action) {
+      console.log(action.payload)
+      console.log(action.payload);
+      const index = state.cartItems.findIndex((item) => item._id === action.payload);
+       if (state.cartItems[index].count > 0) {
+        state.cartItems[index].count--;
+      
+     }
+    },
+    addToCart(state, action) {
+      // console.log(action.payload);
+      let index = state.cartItems.findIndex(
+        (item) => item._id === action.payload._id
+      );
+
+      if (index === -1) {
+        state.cartItems.push({
+          _id: action.payload._id,
+          name: action.payload.name,
+          count: action.payload.count,
+          image: action.payload.image,
+          cost: action.payload.cost,
+        });
       } else {
-        state.items[index].count--;
-        state.count--;
-        state.total -= state.items[index].cost;
-        // setData({ ...state, items: arr });
+        //console.log(index);
+        state.cartItems[index].count += action.payload.count;
       }
     },
     raiseCart(state, action) {
-      let index = state.items.findIndex(
-        (item) => item.id === action.payload.id
+      let index = state.cartItems.findIndex(
+        (item) => item._id === action.payload._id
       );
 
       //kiểm tra sản phẩm tồn tại ở giỏ hàng chưa
@@ -244,10 +266,9 @@ const cartSlice = createSlice({
     },
     deleteItem(state, action) {
       //tìm vị trí phần tử cần xóa
-      let index = state.items.findIndex((item) => item.id === action.payload);
-      state.total -= state.items[index].cost * state.items[index].count;
-      state.count -= state.items[index].count;
-      state.items.splice(index, 1);
+      let index = state.cartItems.findIndex((item) => item._id === action.payload);
+     
+      state.cartItems.splice(index, 1);
       // setData({ ...state, items: arr });
 
       // return {
@@ -263,8 +284,7 @@ const cartSlice = createSlice({
       );
       console.log(index);
       //kiểm tra sản phẩm tồn tại ở giỏ hàng chưa
-      if (action.payload.count === 0) {
-      } else if (state.count === 0 || index === -1) {
+      if (state.count === 0 || index === -1) {
         //cộng biến thêm 1 và update giỏ hàng
         state.items.push(action.payload);
         state.count += action.payload.count;
@@ -276,7 +296,6 @@ const cartSlice = createSlice({
         //   items: arr,
         // };
       } else {
-      
         state.items[index].count += action.payload.count;
         state.count += action.payload.count;
         state.total += action.payload.cost * action.payload.count;
@@ -291,6 +310,13 @@ const cartSlice = createSlice({
   },
 });
 
-export const { setCartData, reduceItem, raiseCart, deleteItem, setCartCount } =
-  cartSlice.actions;
+export const {
+  setShippingAddress,
+  setPaymentMethod,
+  reduceItem,
+  raiseCart,
+  deleteItem,
+  setCartCount,
+  addToCart,
+} = cartSlice.actions;
 export default cartSlice.reducer;
