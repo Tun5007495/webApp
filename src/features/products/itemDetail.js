@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //import { useLocation } from "react-router-dom";
 import { Button, Col, Row, Container } from "reactstrap";
 import "../../css/products.css";
 import { addToCart } from "../../redux/cart";
 import productApi from "../../api/productApi";
 import Avatar from "react-avatar";
+import Comment from "./comment";
 const DetailProduct = (Props) => {
   const dispatch = useDispatch();
   const productId = Props.match.params.id;
-
   const [item, setItem] = useState({});
+  const [comment, setComment] = useState();
+  // const [commentList, setCommentList] = useState();
+  const userInfor = useSelector((state) => state.auth.userInfor);
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const product = await productApi.getId({ _id: productId });
 
-        setItem(product);
+        setItem({ ...product });
+        console.log(item.comments);
       } catch (error) {
         console.log("Failed to fetch product list: ", error);
       }
     };
     fetchProduct();
-  }, []);
+  }, [item.comment]);
   // const location = useLocation();
   // let item = { ...location.state };
   const [count, setCount] = useState(0);
@@ -43,6 +48,21 @@ const DetailProduct = (Props) => {
       setCount(0);
       Props.history.push("/signin?redirect=cart");
     }
+  };
+  const handleChange = (event) => {
+    setComment(event.target.value);
+  };
+  const handleSubmitComment = (e) => {
+    e.preventDefault();
+    const callApi = async () => {
+      await productApi.postComment({
+        content: comment,
+        userId: userInfor._id,
+        username: userInfor.username,
+        _id: productId,
+      });
+    };
+    callApi();
   };
   return (
     <Container className="content">
@@ -102,83 +122,52 @@ const DetailProduct = (Props) => {
         <h5>Describe:</h5>
         <p>{item.description}</p>
       </Row>
-      <Row></Row>
+
       <Row className="product-comment">
-        <div>
-          <b>Comment()</b>
-        </div>
+        <Col sm="1" className="comment-title"> <b>Comment()</b></Col>
+      
+        {userInfor ? (
+          <form className="comment-form">
+            <Row>
+              <Col sm="1" style={{ textAlign: "center" }}>
+                <Avatar
+                  className="usercomment-avatar"
+                  size="50"
+                  name={userInfor.username}
+                  round={true}
+                />
+                <b>{userInfor.username}</b>
+              </Col>
+              <Col sm="11">
+                <textarea
+                  className="comment-input"
+                  placeholder="Enter your comment"
+                  name="Text1"
+                  onChange={handleChange}
+                ></textarea>
+              </Col>
+            </Row>
 
-        <form className="comment-form">
-          <Row>
-            <Col sm="1">
-              <Avatar
-                className="usercomment-avatar"
-                size="50"
-                name="Nhat Phan"
-                src="https://image.thanhnien.vn/1024/uploaded/haoph/2021_03_06/img_0467_lsvb.jpg"
-                round={true}
-              />
-              <b>MyTam</b>
-            </Col>
-            <Col sm="11">
-              <textarea
-                className="comment-input"
-                placeholder="Enter your comment"
-                name="Text1"
-              ></textarea>
-            </Col>
-          </Row>
+            <Row>
+              <Col sm={{ offset: 1 }}>
+                <button
+                  className="comment-buttonSubmit"
+                  onClick={handleSubmitComment}
+                >
+                  post
+                </button>
+              </Col>
+            </Row>
+          </form>
+        ) : (
+          ""
+        )}
 
-          <Row>
-            <Col sm={{ offset: 1 }}>
-              <button className="comment-buttonSubmit" type="submit">
-                post
-              </button>
-            </Col>
-          </Row>
-        </form>
-
-        <Row className="comment-guest">
-          <Col sm="2" className="comment-infor">
-            <Row>
-              <Avatar
-                name="Nhat Phan"
-                src="https://image.thanhnien.vn/1024/uploaded/haoph/2021_03_06/img_0467_lsvb.jpg"
-                round={true}
-              />
-            </Row>
-          </Col>
-          <Col>
-            <Row>
-              <p>
-                <b>My Tam: </b>
-                {item.description}
-              </p>
-            </Row>
-            <Row>
-              <span> Chủ Nhật, 15 tháng 8, 2021 </span>
-            </Row>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm="2">
-            <Avatar
-              name="Nhat Phan"
-              src="https://image.thanhnien.vn/1024/uploaded/haoph/2021_03_06/img_0467_lsvb.jpg"
-              round={true}
-            />
-          </Col>
-          <Col>
-            <Row>
-              <p>{item.description}</p>
-            </Row>
-            <Row>
-              <b>6</b> <i className="fas fa-thumbs-up"></i>
-              <p> {"   "}</p>
-              <span> Chủ Nhật, 15 tháng 8, 2021 </span>
-            </Row>
-          </Col>
-        </Row>
+        {item.comments === [] || item.comments
+          ? item.comments.map((product) => (
+              <Comment key="" item={product}></Comment>
+            ))
+          : ""}
       </Row>
     </Container>
   );

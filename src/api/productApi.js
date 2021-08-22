@@ -7,6 +7,10 @@ const  ProductApi = {
   getId: (params) => {
     const url = "/products";
     return axiosClient.get(url, { params });
+  },
+  postComment:(data)=>{
+    const url = "/products/comment";
+    return axiosClient.post(url,data);
   }
 }
 

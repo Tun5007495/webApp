@@ -30,7 +30,7 @@ const PlaceOrder = (Props) => {
     Props.history.push("/signin/redirect=/");
   }
 
-  const submitHandle =  (e) => {
+  const submitHandle = (e) => {
     e.preventDefault();
     const callApi = async () => {
       await OrderApi.order({

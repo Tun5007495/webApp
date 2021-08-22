@@ -130,5 +130,17 @@
   align-items: center;
   justify-content: center;
 }
-.product-comment .usercomment-avatar {
+
+.comment-display{
+  
+  margin: 1rem;
+  width: 60%;
+}
+.comment-display .word-wrap{
+ 
+  word-break: break-all;
+ 
+}
+.product-comment .comment-title{
+  width: 100%;
 }
