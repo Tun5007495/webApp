@@ -15,7 +15,10 @@ const handleOrder = ()=>{
   return (
     <div className="cart-order">
       <Row>
-        <Col md={{ span: 4, offset: 6 }}>
+        <Col  xs="3" sm={{  offset: 2 }} md={{  offset: 4 }}   lg={{  offset: 5 }}  
+            
+              
+            >
           <div>
             <p>Tổng thanh toán ({items.length} Sản phẩm):</p>
           </div>

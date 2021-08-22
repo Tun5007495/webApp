@@ -1,8 +1,6 @@
 .cart-order {
-  position: absolute;
-  bottom: 2em;
-  left: 0em;
-  right: 0em;
+ 
+  
   padding: 1rem;
   border-style: outset;
   background-color: white;
@@ -19,8 +17,8 @@
   color: red;
 }
 .cart-order .cart-buttonBuy {
-  width: 13rem;
-  height: 3rem;
+  width: 7rem;
+  height: 100%;
 }
 .cart-item {
   border-style: ridge;

@@ -1,26 +1,80 @@
-import React from "react";
-import {  Col, Row } from "reactstrap";
+import React,{useState} from "react";
+//import { Col, Row } from "reactstrap";
 //import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  
+ 
+  NavbarText
+} from 'reactstrap';
 import { Link } from "react-router-dom";
 import "../css/header.css";
 import Logo from "../assets/logo192.png";
 const Example = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
   return (
     <div className="header">
-      <Row>
+
+
+<div>
+      <Navbar color="light" light expand="md">
+        <NavbarBrand href="/"> <img className="header-logo" src={Logo} alt="logo"></img></NavbarBrand>
+        <NavbarToggler onClick={toggle}  />
+
+
+        <Collapse  isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+            
+              <Link className="header-item" to="/home">HOME</Link>
+            </NavItem>
+            <NavItem>
+             
+              <Link className="header-item" to="/cart">CART</Link>
+            </NavItem>
+            <NavItem>
+              
+              <Link className="header-item" to="/signin">ME</Link>
+            </NavItem>
+          
+          </Nav>
+          <NavbarText>Simple Text</NavbarText>
+        </Collapse>
+      </Navbar>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {/* <Row>
         <Col md={{ size: 1, offset: 1 }}>
           <img className="header-logo" src={Logo} alt="logo"></img>
         </Col>
         <Col md={{ size: 1, offset: 2 }}>
-          <div className="header-item">
-            <div>
-              <i className="fas fa-home"></i>
-            </div>
-            <div>
-              <Link to="/">Home</Link>
-            </div>
-          </div>
+        
         </Col>
         <Col md={{ size: 1 }}>
           <div className="header-item">
@@ -48,7 +102,7 @@ const Example = () => {
           </div>
         </Col>
         <hr></hr>
-      </Row>
+      </Row> */}
     </div>
   );
 };

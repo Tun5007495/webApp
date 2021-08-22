@@ -8,7 +8,7 @@ const Comment = (Props) => {
   return (
 
   <Row className="comment-display" sm="1">
-      <Col sm="2">
+      <Col xs="3" md="2" sm="3" lg="2">
         <Avatar
           name={item.username}
          // src="https://image.thanhnien.vn/1024/uploaded/haoph/2021_03_06/img_0467_lsvb.jpg"
@@ -17,8 +17,8 @@ const Comment = (Props) => {
         />
        
       </Col>
-      <Col sm="10">
-        <Row className="word-wrap">
+      <Col xs="9" md="10" sm="9" lg="10">
+        <Row >
           <p  className="word-wrap"><b>{item.username}:</b>{item.content}</p>
         </Row>
         <Row>

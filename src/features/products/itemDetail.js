@@ -67,55 +67,63 @@ const DetailProduct = (Props) => {
   return (
     <Container className="content">
       <Row className="product-detail">
-        <Col>
+        <Col xs="6" md="6" sm="6" lg="6">
           <img
             className="product-detailImage"
             src={item.image}
             alt="item"
           ></img>
         </Col>
-        <Col>
-          <div className="product-detailProduct">
-            <h2>{item.name}</h2>
-            <p>Cost: ${item.cost}</p>
-            <Row className="product-detailBorderCount">
-              <Col
-                xs={{ size: 1, offset: 4 }}
-                md={{ size: 1, offset: 4 }}
-                className="p-reduce"
-              >
-                <button
-                  className="p-Button"
-                  onClick={count > 0 ? () => setCount(count - 1) : () => {}}
-                >
-                  -
-                </button>
-              </Col>
-              <Col xs="2" md="2" className="p">
-                {count}
-              </Col>
-              <Col xs="1" md="1" className="p-increase">
-                <button
-                  onClick={() => setCount(count + 1)}
-                  className="p-Button"
-                >
-                  +
-                </button>
-              </Col>
-            </Row>
+        <Col xs="6" md="6" sm="6" lg="6">
+          {/* <div className="product-detailProduct"> */}
+          <Row className="product-detailBorderCount ">
+            <Col xs="12" md="12" sm="12" lg={{size:"12"}} className="product-detailName">
+              <h2>{item.name}</h2>
+              <p>Cost: ${item.cost}</p>
+            </Col>
+            <Col xs="12" md="12" sm="12" lg="12">
+              <Row>
+                <Col xs={{size:"1", offset:"3"}} md={{size:"1", offset:"4"}} sm={{size:"1", offset:"3"}} lg={{size:"1", offset:"4"}} className="p-reduce">
+                  {" "}
+                  <button
+                    className="p-Button"
+                    onClick={count > 0 ? () => setCount(count - 1) : () => {}}
+                  >
+                    -
+                  </button>
+                </Col>
+                <Col xs="2" md="2" sm="2" lg="2" className="p-count">
+                  {" "}
+                  <div xs="2" md="2" >
+                    {count}
+                  </div>
+                </Col>
+                <Col xs="1" md="1" sm="1" lg="1" className="p-increase" >
+                  {" "}
+                  <button
+                    onClick={() => setCount(count + 1)}
+                    className="p-Button "
+                  >
+                    +
+                  </button>
+                </Col>
+              </Row>
+            </Col>
 
-            <div>
+            <Col xs="12" md="12" sm="12" lg="6">
               <Button
                 onClick={() => addItem()}
                 className="products-detailAddToCart"
               >
                 Add to cart
               </Button>
+            </Col>
+            <Col xs="12" md="12" sm="12" lg="6">
               <Button onClick={checkoutHandler} className="products-detailBuy">
                 Buy
               </Button>
-            </div>
-          </div>
+            </Col>
+          </Row>
         </Col>
       </Row>
       <Row className="product-describe">
@@ -124,12 +132,15 @@ const DetailProduct = (Props) => {
       </Row>
 
       <Row className="product-comment">
-        <Col sm="1" className="comment-title"> <b>Comment()</b></Col>
-      
+        <Col sm="1" className="comment-title">
+          {" "}
+          <b>Comment()</b>
+        </Col>
+
         {userInfor ? (
           <form className="comment-form">
             <Row>
-              <Col sm="1" style={{ textAlign: "center" }}>
+              <Col xs="2" md="1" lg="1" sm="2" style={{ textAlign: "center" }}>
                 <Avatar
                   className="usercomment-avatar"
                   size="50"
@@ -138,7 +149,7 @@ const DetailProduct = (Props) => {
                 />
                 <b>{userInfor.username}</b>
               </Col>
-              <Col sm="11">
+              <Col xs="10" md="11" lg="11" sm="10">
                 <textarea
                   className="comment-input"
                   placeholder="Enter your comment"
