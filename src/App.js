@@ -16,6 +16,7 @@ import Profile from "./features/me/profile";
 import Shipping from "./features/shipping/index";
 import Payment from "./features/payment/index";
 import PlaceOrder from "./features/placeOrder/index";
+import ChatBox from './components/chatBox.js'
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API,
   authDomain: "webapp-b19a3.firebaseapp.com",
@@ -24,6 +25,7 @@ const config = {
 
 firebase.initializeApp(config);
 function App() {
+ 
   useEffect(() => {
     const unregisterAuthObserver = firebase
       .auth()
@@ -53,7 +55,7 @@ function App() {
           <Route path="/shipping" component={Shipping}></Route>
           <Route path="/payment" component={Payment}></Route>
           <Route path="/placeorder" component={PlaceOrder}></Route>
-
+<ChatBox></ChatBox>
           <Footer></Footer>
         </Router>
       </div>

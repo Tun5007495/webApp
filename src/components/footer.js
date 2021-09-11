@@ -10,7 +10,7 @@ const Example = () => {
         <div className="wrap-footer">
           <Row>
             <Col sm={3}>
-              <b className="text-1">Create your own Meetup group.</b>
+              <b className="text-1">Join to own group.</b>
             </Col>
             <Col sm={2}>
               <Button outline className="footer-button">
@@ -38,16 +38,7 @@ const Example = () => {
                 <p>Cities</p>
               </div>
             </Col>
-            <Col sm={4}>
-              <div className="tb-column">
-                <b>Meetup</b>
-                <p>About</p>
-                <p>Blog</p>
-                <p>Meetup Pro</p>
-                <p>Careers</p>
-                <p>Apps</p>
-              </div>
-            </Col>
+           
           </Row>
 
           <div className="wrap-logo">

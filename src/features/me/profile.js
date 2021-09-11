@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Col, Container, Row } from "reactstrap";
-import avatar from "../../assets/avatar.jpg";
+import Avatar from "react-avatar";
 import "../../css/profile.css";
 
 import { signOut } from "../../redux/auth";
@@ -9,12 +9,10 @@ import { signOut } from "../../redux/auth";
 const Login = (Props) => {
   const dispatch = useDispatch();
   const userInfor = useSelector((state) => state.auth.userInfor);
+  if (!userInfor) {
+    Props.history.push("/signin");
+  }
 
-  useEffect(() => {
-    if (!userInfor) {
-      Props.history.push("/signin");
-    }
-  }, [Props.history, userInfor]);
   const logout = () => {
     dispatch(signOut());
   };
@@ -23,9 +21,13 @@ const Login = (Props) => {
       <div className="profile">
         <Row>
           <Col>
-            <div>
-              <img className="profile-avatar" src={avatar} alt="avatar"></img>
-            </div>
+          <Avatar
+          className="profile-avatar"
+          name={userInfor?userInfor.username:""}
+         // src="https://image.thanhnien.vn/1024/uploaded/haoph/2021_03_06/img_0467_lsvb.jpg"
+          round={true}
+         size="100%"
+        />
           </Col>
           <Col>
             <h2>
@@ -33,7 +35,7 @@ const Login = (Props) => {
             </h2>
             <hr />
             <h3>
-              <b>HCMUS</b>
+              <b>{userInfor?userInfor.username:""}</b>
             </h3>
             <p>Student</p>
             <p>
