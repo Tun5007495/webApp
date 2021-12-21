@@ -2,7 +2,7 @@ import firebase from "firebase";
 import React, { useState, useEffect } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { useSelector, useDispatch } from "react-redux";
-import { Link} from 'react-router-dom'
+
 import {
   Button,
   Col,
@@ -101,16 +101,23 @@ const Signin = (Props) => {
                   onChange={(event) => setPassword(event.target.value)}
                 />
               </FormGroup>
-              <p className="login-forgotPassword">Forgot your password?</p>
+              <FormGroup>
+                <Label for="examplePassword">Confirm</Label>
+                <Input
+                  type="password"
+                  name="password"
+                  id="examplePassword"
+                  placeholder="Password"
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+              </FormGroup>
+             
               <Button onClick={() => submit({ username, password })}>
                 {" "}
-                <b>Log in</b>
+                <b>Submit</b>
               </Button>
               {" "}
-              <Button>
-              
-                <Link to="/register"><b>register</b></Link>
-              </Button>
+            
               <StyledFirebaseAuth
                 uiConfig={uiConfig}
                 firebaseAuth={firebase.auth()}

@@ -17,6 +17,7 @@ import Shipping from "./features/shipping/index";
 import Payment from "./features/payment/index";
 import PlaceOrder from "./features/placeOrder/index";
 import ChatBox from './components/chatBox.js'
+import Register from "./features/me/register"
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API,
   authDomain: "webapp-b19a3.firebaseapp.com",
@@ -51,6 +52,7 @@ function App() {
           <Route exact path="/me" component={Me}></Route>
           <Route path="/product/:id" component={Product}></Route>
           <Route path="/signin" component={Signin}></Route>
+          <Route path="/register" component={Register}></Route>
           <Route path="/profile" component={Profile}></Route>
           <Route path="/shipping" component={Shipping}></Route>
           <Route path="/payment" component={Payment}></Route>
