@@ -14,8 +14,18 @@ const PlaceOrder = (Props) => {
   //   const [country, setCountry] = useState();
   //   const [postalCode, setPostalCode] = useState();
   const stateCart = useSelector((state) => state.cart);
-  const { fullname, address, city, country, postalCode } =
-    stateCart.shippingAddress;
+  const {
+    apartmentnumber,
+    streetnames,
+    wards,
+    fullname,
+    district,
+    address,
+    city,
+    country,
+    postalCode,
+    sdt,
+  } = stateCart.shippingAddress;
   const paymentMethod = stateCart.paymentMethod;
   const items = useSelector((state) => state.cart.cartItems);
 
@@ -23,7 +33,7 @@ const PlaceOrder = (Props) => {
   const userSignin = useSelector((state) => state.auth);
 
   const total = items.reduce(function (prev, cur) {
-    return prev + cur.cost * cur.count;
+    return prev + cur.GiaSP * cur.SoLuong;
   }, 0);
   const { userInfor } = userSignin;
   if (!userInfor) {
@@ -32,22 +42,32 @@ const PlaceOrder = (Props) => {
 
   const submitHandle = (e) => {
     e.preventDefault();
+    let donHang = {
+   
+      KhachHangId: 1,
+     
+      cuaHangId: 1,
+      shipperId: null,
+      diaChiGiao: {
+        tinhTP: city,
+        soNhaTo: apartmentnumber,
+        duong: streetnames,
+        xaPhuong: wards,
+        quanHuyen: district,
+      },
+      TTDHId: 1,
+      PTTTId: 1,
+      listSanPham: items,
+    };
+    console.log(donHang);
+
     const callApi = async () => {
       await OrderApi.order({
-        cartItems: items,
-        shippingAddress: {
-          fullname,
-          address,
-          city,
-          country,
-          postalCode,
-        },
-        paymentMethod: paymentMethod,
-        userId: userInfor._id,
+        ...donHang,
       });
     };
     callApi();
-    Props.history.push("/home");
+    // Props.history.push("/home");
   };
 
   return (
@@ -65,6 +85,10 @@ const PlaceOrder = (Props) => {
                 <p>
                   <b>Name: </b>
                   {fullname}
+                </p>
+                <p>
+                  <b>Phone Number: </b>
+                  {sdt}
                 </p>
                 <p>
                   <b>Address:</b> {address},{city},{country},{postalCode}

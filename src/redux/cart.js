@@ -183,10 +183,14 @@ const initialState = {
   cartItems: [],
   shippingAddress: {
     fullname: null,
-    address: null,
+    apartmentnumber: null,
+    streetnames: null,
+    wards: null,
+    district: null,
     city: null,
     country: null,
     postalCode: null,
+    sdt: null,
   },
   paymentMethod: null,
 };
@@ -199,38 +203,43 @@ const cartSlice = createSlice({
       // if(action.payload.count){
       //   state = {...action.payload};
       // }
-      
+
       state.shippingAddress.fullname = action.payload.fullname;
-      state.shippingAddress.address = action.payload.address;
+      state.shippingAddress.apartmentnumber = action.payload.apartmentnumber;
+      state.shippingAddress.streetnames = action.payload.streetnames;
+      state.shippingAddress.wards = action.payload.wards;
+      state.shippingAddress.district = action.payload.district;
       state.shippingAddress.city = action.payload.city;
       state.shippingAddress.country = action.payload.country;
       state.shippingAddress.postalCode = action.payload.postalCode;
+      state.shippingAddress.sdt = action.payload.sdt;
     },
     setPaymentMethod(state, action) {
       state.paymentMethod = action.payload.paymentMethod;
     },
-    reduceItem( state,action) {
-      console.log(action.payload)
+    reduceItem(state, action) {
       console.log(action.payload);
-      const index = state.cartItems.findIndex((item) => item._id === action.payload);
-       if (state.cartItems[index].count > 0) {
+      console.log(action.payload);
+      const index = state.cartItems.findIndex(
+        (item) => item.Id === action.payload
+      );
+      if (state.cartItems[index].count > 0) {
         state.cartItems[index].count--;
-      
-     }
+      }
     },
     addToCart(state, action) {
-      // console.log(action.payload);
+      console.log(action.payload);
       let index = state.cartItems.findIndex(
-        (item) => item._id === action.payload._id
+        (item) => item.Id === action.payload.Id
       );
 
       if (index === -1) {
         state.cartItems.push({
-          _id: action.payload._id,
-          name: action.payload.name,
-          count: action.payload.count,
-          image: action.payload.image,
-          cost: action.payload.cost,
+          Id: action.payload.Id,
+          Ten: action.payload.Ten,
+          SoLuong: action.payload.count,
+          image: action.payload.HinhSanPham.Url,
+          GiaSP: action.payload.GiaSP,
         });
       } else {
         //console.log(index);
@@ -239,7 +248,7 @@ const cartSlice = createSlice({
     },
     raiseCart(state, action) {
       let index = state.cartItems.findIndex(
-        (item) => item._id === action.payload._id
+        (item) => item._id === action.payload.Id
       );
 
       //kiểm tra sản phẩm tồn tại ở giỏ hàng chưa
@@ -249,14 +258,14 @@ const cartSlice = createSlice({
         action.payload.count = 1;
         state.items.push(action.payload);
         state.count++;
-        state.total += action.payload.cost;
+        state.total += action.payload.GiaSP;
         //storeData({ ...state, items: arr });
         //setData({ ...state, items: arr });
       } //cộng biến thêm 1 và update giỏ hàng
 
       state.items[index].count++;
       state.count++;
-      state.total += action.payload.cost;
+      state.total += action.payload.GiaSP;
 
       // setData({ ...state, items: arr });
       // return {
@@ -266,8 +275,10 @@ const cartSlice = createSlice({
     },
     deleteItem(state, action) {
       //tìm vị trí phần tử cần xóa
-      let index = state.cartItems.findIndex((item) => item._id === action.payload);
-     
+      let index = state.cartItems.findIndex(
+        (item) => item._id === action.payload
+      );
+
       state.cartItems.splice(index, 1);
       // setData({ ...state, items: arr });
 

@@ -1,31 +1,47 @@
 import React, { useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setShippingAddress } from "../../redux/cart";
 import CheckSteps from "../../components/checksteps.js";
 import { Container } from "reactstrap";
 import "../../css/shipping.css";
 const Shipping = (Props) => {
   const [fullname, setFullname] = useState();
-  const [address, setAddress] = useState();
+  const [apartmentnumber, setApartmentnumber] = useState();
+  const [wards, setWards] = useState();
+  const [streetnames, setStreetNames] = useState();
+  const [district, setDistrict] = useState();
   const [city, setCity] = useState();
+  const [sdt, setSdt] = useState();
   const [country, setCountry] = useState();
   const [postalCode, setPostalCode] = useState();
   const dispatch = useDispatch();
   const userSignin = useSelector((state) => state.auth);
-const cart = useSelector((state)=>state.cart);
-const {cartItems} = cart;
-  const {userInfor} = userSignin;
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+  const { userInfor } = userSignin;
   if (!userInfor) {
-   Props.history.push('/signin?redirect=shipping');
- }
- if (!cartItems.length) {
+    Props.history.push("/signin?redirect=shipping");
+  }
+  if (!cartItems.length) {
     alert("cart is empty!");
-    Props.history.push('/');
+    Props.history.push("/");
   }
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(setShippingAddress({ fullname, address, city, country, postalCode }));
-Props.history.push('/payment');
+    dispatch(
+      setShippingAddress({
+        fullname,
+        city,
+        country,
+        postalCode,
+        apartmentnumber,
+        streetnames,
+        wards,
+        district,
+        sdt,
+      })
+    );
+    Props.history.push("/payment");
   };
 
   return (
@@ -48,19 +64,81 @@ Props.history.push('/payment');
           required
         ></input>
         <br />
-        <label className="label-shipping" htmlFor="address">
-          Address
+        <label className="label-shipping" htmlFor="postalCode">
+          Phone number
         </label>
         <br />
         <input
           className="input-shipping"
-          id="address"
+          id="sdt"
           type="text"
-          placeholder="Enter address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
+          placeholder="Enter phone number"
+          value={sdt}
+          onChange={(e) => setSdt(e.target.value)}
           required
         ></input>
+        <br />
+
+        <label className="label-shipping" htmlFor="apartmentnumber">
+          apartment number
+        </label>
+        <br />
+        <input
+          className="input-shipping"
+          id="apartmentnumber"
+          type="text"
+          placeholder="Enter apartment number"
+          value={apartmentnumber}
+          onChange={(e) => setApartmentnumber(e.target.value)}
+          required
+        ></input>
+        <br />
+        <label className="label-shipping" htmlFor=" streetnames">
+          Street names
+        </label>
+        <br />
+        <input
+          className="input-shipping"
+          id="streetnames"
+          type="text"
+          placeholder="Enter street names"
+          value={streetnames}
+          onChange={(e) => setStreetNames(e.target.value)}
+          required
+        ></input>
+        <br />
+        <label className="label-shipping" htmlFor="wards">
+          wards
+        </label>
+        <br />
+        <input
+          className="input-shipping"
+          id="wards"
+          type="text"
+          placeholder="Enter wards"
+          value={wards}
+          onChange={(e) => setWards(e.target.value)}
+          required
+        ></input>
+        <br />
+        <label
+          className="label-shipping"
+          htmlFor="
+district"
+        >
+          District
+        </label>
+        <br />
+        <input
+          className="input-shipping"
+          id="district"
+          type="text"
+          placeholder="Enter District"
+          value={district}
+          onChange={(e) => setDistrict(e.target.value)}
+          required
+        ></input>
+
         <br />
         <label className="label-shipping" htmlFor="city">
           City

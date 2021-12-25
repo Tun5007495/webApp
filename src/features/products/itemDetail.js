@@ -18,9 +18,9 @@ const DetailProduct = (Props) => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const product = await productApi.getId({ _id: productId });
-
-        setItem({ ...product });
+        const product = await productApi.getId(productId);
+       
+        setItem({ ...product[0] });
         console.log(item.comments);
       } catch (error) {
         console.log("Failed to fetch product list: ", error);
@@ -34,6 +34,7 @@ const DetailProduct = (Props) => {
 
   let addItem = () => {
     if (count) {
+
       item.count = count;
 
       dispatch(addToCart({ ...item }));
@@ -43,7 +44,6 @@ const DetailProduct = (Props) => {
   const checkoutHandler = () => {
     if (count) {
       item.count = count;
-
       dispatch(addToCart({ ...item }));
       setCount(0);
       Props.history.push("/signin?redirect=cart");
@@ -70,20 +70,32 @@ const DetailProduct = (Props) => {
         <Col xs="6" md="6" sm="6" lg="6">
           <img
             className="product-detailImage"
-            src={item.image}
+            src={item.HinhSanPham?item.HinhSanPham.Url:""}
             alt="item"
           ></img>
         </Col>
         <Col xs="6" md="6" sm="6" lg="6">
           {/* <div className="product-detailProduct"> */}
           <Row className="product-detailBorderCount ">
-            <Col xs="12" md="12" sm="12" lg={{size:"12"}} className="product-detailName">
-              <h2>{item.name}</h2>
-              <p>Cost: ${item.cost}</p>
+            <Col
+              xs="12"
+              md="12"
+              sm="12"
+              lg={{ size: "12" }}
+              className="product-detailName"
+            >
+              <h2>{item.Ten}</h2>
+              <p>Cost: ${item.GiaSP}</p>
             </Col>
             <Col xs="12" md="12" sm="12" lg="12">
               <Row>
-                <Col xs={{size:"1", offset:"3"}} md={{size:"1", offset:"4"}} sm={{size:"1", offset:"3"}} lg={{size:"1", offset:"4"}} className="p-reduce">
+                <Col
+                  xs={{ size: "1", offset: "3" }}
+                  md={{ size: "1", offset: "4" }}
+                  sm={{ size: "1", offset: "3" }}
+                  lg={{ size: "1", offset: "4" }}
+                  className="p-reduce"
+                >
                   {" "}
                   <button
                     className="p-Button"
@@ -94,11 +106,11 @@ const DetailProduct = (Props) => {
                 </Col>
                 <Col xs="2" md="2" sm="2" lg="2" className="p-count">
                   {" "}
-                  <div xs="2" md="2" >
+                  <div xs="2" md="2">
                     {count}
                   </div>
                 </Col>
-                <Col xs="1" md="1" sm="1" lg="1" className="p-increase" >
+                <Col xs="1" md="1" sm="1" lg="1" className="p-increase">
                   {" "}
                   <button
                     onClick={() => setCount(count + 1)}

@@ -1,7 +1,7 @@
 import axiosClient from "./axiosClient";
 const orderApi = {
   order: (params) => {
-    const url = "/order";
+    const url = "/api/donhang/khachhangdathang";
     return axiosClient.post(url, params );
   },
 };

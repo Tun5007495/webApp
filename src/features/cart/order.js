@@ -5,7 +5,7 @@ import { withRouter} from 'react-router-dom';
 const CartOrder = (Props) => {
   const items = useSelector((state) => state.cart.cartItems);
   const total = items.reduce(function(prev, cur) {
-    return prev + cur.cost*cur.count;
+    return prev + cur.GiaSP*cur.SoLuong;
   }, 0);
 
 const handleOrder = ()=>{

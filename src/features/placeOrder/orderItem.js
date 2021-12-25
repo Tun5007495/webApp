@@ -9,17 +9,17 @@ const OrderItems = (Props) => {
         <b>{item.name}</b>
       </Col>
 
-      <Col  sm="6">
+      <Col  sm="5">
         <img className="orderItems-image" src={item.image}></img>
       </Col>
-      <Col  sm="1">
-        <p>{item.cost}$</p>
+      <Col  sm="2">
+        <p>{item.GiaSP}{""}$</p>
       </Col>
       <Col sm="1">
-      <p>{item.count}</p>
+      <p>{item.SoLuong}</p>
       </Col>
       <Col  sm="2">
-        <p>total:{item.cost * item.count}$</p>
+        <p>total:{item.GiaSP * item.SoLuong}$</p>
       </Col>
     </Row>
   );
