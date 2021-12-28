@@ -9,7 +9,7 @@ const Example = (Props) => {
     <div className="products-item">
       <img
         className="products-itemImage"
-        src={ item.HinhSanPham.Url}
+        src={item.HinhSanPham?.Url}
         alt="item"
       ></img>
       <div className="icon-heart">

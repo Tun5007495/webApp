@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 import logo from "../../assets/logo192.png";
 import { signIn } from "../../redux/auth";
-import loginApi from "../../api/loginApi";
+import loginApi from "../../api/userApi";
 const uiConfig = {
   // Popup signin flow rather than redirect flow.
   signInFlow: "redirect",
