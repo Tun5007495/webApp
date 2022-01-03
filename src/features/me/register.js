@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 import logo from "../../assets/logo192.png";
 import { signIn } from "../../redux/auth";
-import loginApi from "../../api/loginApi";
+import loginApi from "../../api/userApi";
 const uiConfig = {
   // Popup signin flow rather than redirect flow.
   signInFlow: "redirect",
@@ -29,6 +29,7 @@ const uiConfig = {
 const Signin = (Props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const dispatch = useDispatch();
   const redirect = Props.location.search
     ? Props.location.search.split("=")[1]
@@ -51,7 +52,7 @@ const Signin = (Props) => {
   const submit = async (infor) => {
     try {
       // const params = { _page: 1, _limit: 10 };
-      const data = await loginApi.postUser(infor);
+      const data = await loginApi.registerUser(infor);
 
       localStorage.setItem("userInfor", JSON.stringify(data));
       //console.log(localStorage.getItem('userInfor'));
@@ -78,7 +79,7 @@ const Signin = (Props) => {
                 alt="logo"
               />
             </div>
-            <h2>Log in</h2>
+            <h2>Register</h2>
             <hr />
             <Form>
               <FormGroup>
@@ -88,6 +89,16 @@ const Signin = (Props) => {
                   name="email"
                   id="exampleEmail"
                   placeholder="Email"
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              </FormGroup>{" "}
+              <FormGroup>
+                <Label for="exampleEmail">Username</Label>
+                <Input
+                  type="text"
+                  name="username"
+                  id="exampleEmail"
+                  placeholder="username"
                   onChange={(event) => setUsername(event.target.value)}
                 />
               </FormGroup>{" "}
@@ -111,13 +122,10 @@ const Signin = (Props) => {
                   onChange={(event) => setPassword(event.target.value)}
                 />
               </FormGroup>
-             
-              <Button onClick={() => submit({ username, password })}>
+              <Button onClick={() => submit({ username, password ,email})}>
                 {" "}
                 <b>Submit</b>
-              </Button>
-              {" "}
-            
+              </Button>{" "}
               <StyledFirebaseAuth
                 uiConfig={uiConfig}
                 firebaseAuth={firebase.auth()}

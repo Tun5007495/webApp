@@ -238,7 +238,7 @@ const cartSlice = createSlice({
           Id: action.payload.Id,
           Ten: action.payload.Ten,
           SoLuong: action.payload.count,
-          image: action.payload.HinhSanPham.Url,
+          image: action.payload.HinhSanPham?.Url,
           GiaSP: action.payload.GiaSP,
         });
       } else {

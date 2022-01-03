@@ -6,7 +6,7 @@ import { Container, Row, Col } from "reactstrap";
 import OrderItems from "./orderItem";
 import "../../css/placeOrder.css";
 import OrderApi from "../../api/orderApi";
-
+  // import { ToastContainer, toast } from "react-toastify";
 const PlaceOrder = (Props) => {
   //   const [fullname, setFullname] = useState();
   //   const [address, setAddress] = useState();
@@ -66,8 +66,18 @@ const PlaceOrder = (Props) => {
         ...donHang,
       });
     };
-    callApi();
-    // Props.history.push("/home");
+    try{
+      if(callApi()){
+Props.history.push("/home");
+      }
+      
+    }catch(e){
+console.log(e);
+    }
+    
+        
+    
+   
   };
 
   return (
