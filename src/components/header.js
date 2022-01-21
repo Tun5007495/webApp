@@ -8,9 +8,11 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  
- 
-  NavbarText
+  Input,
+  InputGroup,
+  InputGroupText
+
+
 } from 'reactstrap';
 import { Link } from "react-router-dom";
 import "../css/header.css";
@@ -21,53 +23,36 @@ const Example = () => {
   const toggle = () => setIsOpen(!isOpen);
   return (
     <div className="header">
+      <div>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/">
+            {" "}
+            <img className="header-logo" src={Logo} alt="logo"></img>
+          </NavbarBrand>
+          <NavbarToggler onClick={toggle} />
 
-
-<div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/"> <img className="header-logo" src={Logo} alt="logo"></img></NavbarBrand>
-        <NavbarToggler onClick={toggle}  />
-
-
-        <Collapse  isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-            
-              <Link className="header-item" to="/home">HOME</Link>
-            </NavItem>
-            <NavItem>
-             
-              <Link className="header-item" to="/cart">CART</Link>
-            </NavItem>
-            <NavItem>
-              
-              <Link className="header-item" to="/signin">ME</Link>
-            </NavItem>
+          <Collapse isOpen={isOpen} navbar>
+            <Nav className="mr-auto" navbar>
+              <NavItem>
+                <Link className="header-item" to="/home">
+                  HOME
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Link className="header-item" to="/cart">
+                  CART
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Link className="header-item" to="/signin">
+                  ME
+                </Link>
+              </NavItem>
+            </Nav>
           
-          </Nav>
-          <NavbarText>Simple Text</NavbarText>
-        </Collapse>
-      </Navbar>
-    </div>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          </Collapse>
+        </Navbar>
+      </div>
 
       {/* <Row>
         <Col md={{ size: 1, offset: 1 }}>

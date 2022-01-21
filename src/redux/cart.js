@@ -182,14 +182,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   cartItems: [],
   shippingAddress: {
+    idDiaChi: null,
     fullname: null,
     apartmentnumber: null,
     streetnames: null,
     wards: null,
     district: null,
     city: null,
-    country: null,
-    postalCode: null,
+
     sdt: null,
   },
   paymentMethod: null,
@@ -210,43 +210,50 @@ const cartSlice = createSlice({
       state.shippingAddress.wards = action.payload.wards;
       state.shippingAddress.district = action.payload.district;
       state.shippingAddress.city = action.payload.city;
-      state.shippingAddress.country = action.payload.country;
-      state.shippingAddress.postalCode = action.payload.postalCode;
+      state.shippingAddress.idDiaChi = action.payload.Id;
+
       state.shippingAddress.sdt = action.payload.sdt;
     },
     setPaymentMethod(state, action) {
       state.paymentMethod = action.payload.paymentMethod;
     },
     reduceItem(state, action) {
-      console.log(action.payload);
-      console.log(action.payload);
-      const index = state.cartItems.findIndex(
-        (item) => item.Id === action.payload
-      );
-      if (state.cartItems[index].count > 0) {
-        state.cartItems[index].count--;
+      let index;
+
+      index = state.cartItems.findIndex((item) => item.Id === action.payload);
+
+      if (state.cartItems[index].SoLuong > 0) {
+        state.cartItems[index].SoLuong--;
       }
     },
     addToCart(state, action) {
-      console.log(action.payload);
-      let index = state.cartItems.findIndex(
-        (item) => item.Id === action.payload.Id
-      );
+      console.log("add", action.payload);
+      let index;
+      if (action.payload.id) {
+        index = state.cartItems.findIndex(
+          (item) => item.Id === action.payload.id
+        );
+      } else {
+        index = state.cartItems.findIndex(
+          (item) => item.Id === action.payload.Id
+        );
+      }
 
       if (index === -1) {
         state.cartItems.push({
-          Id: action.payload.Id,
-          Ten: action.payload.Ten,
+          Id: action.payload.id || action.payload.Id,
+          Ten: action.payload.ten || action.payload.Ten,
           SoLuong: action.payload.count,
-          image: action.payload.HinhSanPham?.Url,
-          GiaSP: action.payload.GiaSP,
+          image: action.payload.hinhAnh?.url || action.payload.image,
+          GiaSP: action.payload.giaSP || action.payload.GiaSP,
         });
       } else {
-        //console.log(index);
-        state.cartItems[index].count += action.payload.count;
+        console.log("cart", state.cartItems[index].count);
+        state.cartItems[index].SoLuong += action.payload.count;
       }
     },
     raiseCart(state, action) {
+      console.log("raise", action.payload);
       let index = state.cartItems.findIndex(
         (item) => item._id === action.payload.Id
       );
@@ -258,14 +265,14 @@ const cartSlice = createSlice({
         action.payload.count = 1;
         state.items.push(action.payload);
         state.count++;
-        state.total += action.payload.GiaSP;
+        state.total += action.payload.giaSP;
         //storeData({ ...state, items: arr });
         //setData({ ...state, items: arr });
       } //cộng biến thêm 1 và update giỏ hàng
 
       state.items[index].count++;
       state.count++;
-      state.total += action.payload.GiaSP;
+      state.total += action.payload.giaSP;
 
       // setData({ ...state, items: arr });
       // return {

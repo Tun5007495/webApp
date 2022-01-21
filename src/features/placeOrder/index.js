@@ -6,7 +6,8 @@ import { Container, Row, Col } from "reactstrap";
 import OrderItems from "./orderItem";
 import "../../css/placeOrder.css";
 import OrderApi from "../../api/orderApi";
-  // import { ToastContainer, toast } from "react-toastify";
+import Cookies from "js-cookie";
+// import { ToastContainer, toast } from "react-toastify";
 const PlaceOrder = (Props) => {
   //   const [fullname, setFullname] = useState();
   //   const [address, setAddress] = useState();
@@ -15,6 +16,7 @@ const PlaceOrder = (Props) => {
   //   const [postalCode, setPostalCode] = useState();
   const stateCart = useSelector((state) => state.cart);
   const {
+    idDiaChi,
     apartmentnumber,
     streetnames,
     wards,
@@ -22,62 +24,63 @@ const PlaceOrder = (Props) => {
     district,
     address,
     city,
-    country,
-    postalCode,
+
     sdt,
   } = stateCart.shippingAddress;
   const paymentMethod = stateCart.paymentMethod;
   const items = useSelector((state) => state.cart.cartItems);
 
   //const dispatch = useDispatch();
-  const userSignin = useSelector((state) => state.auth);
+  // const userSignin = useSelector((state) => state.auth);
 
   const total = items.reduce(function (prev, cur) {
     return prev + cur.GiaSP * cur.SoLuong;
   }, 0);
-  const { userInfor } = userSignin;
+  const userInfor = JSON.parse(Cookies.get("userInfor"));
+  console.log(userInfor);
   if (!userInfor) {
     Props.history.push("/signin/redirect=/");
   }
 
   const submitHandle = (e) => {
     e.preventDefault();
-    let donHang = {
-   
-      KhachHangId: 1,
-     
-      cuaHangId: 1,
-      shipperId: null,
-      diaChiGiao: {
-        tinhTP: city,
-        soNhaTo: apartmentnumber,
-        duong: streetnames,
-        xaPhuong: wards,
-        quanHuyen: district,
-      },
-      TTDHId: 1,
-      PTTTId: 1,
-      listSanPham: items,
-    };
-    console.log(donHang);
+    try {
+      let donHang = {
+        KhachHangId: userInfor.Id,
 
-    const callApi = async () => {
-      await OrderApi.order({
-        ...donHang,
-      });
-    };
-    try{
-      if(callApi()){
-Props.history.push("/home");
-      }
-      
-    }catch(e){
-console.log(e);
+        cuaHangId: 1,
+        shipperId: null,
+        diaChiGiao: {
+          tinhTP: city,
+          soNhaTo: apartmentnumber,
+          duong: streetnames,
+          xaPhuong: wards,
+          quanHuyen: district,
+        },
+        TTDHId: 1,
+        PTTTId: 1,
+        listSanPham: items,
+        TongTien: total,
+        SDT: sdt,
+        NguoiNhan: fullname,
+        DiaChiGiaoId: idDiaChi,
+      };
+      console.log("1", donHang);
+
+      const callApi = async () => {
+        await OrderApi.order({
+          ...donHang,
+        });
+      };
+
+      const temp = callApi();
+      console.log("2", temp);
+      // if () {
+      //   Props.history.push("/home");
+      // }
+    } catch (e) {
+      console.log(e);
     }
-    
-        
-    
-   
   };
 
   return (
@@ -101,7 +104,8 @@ console.log(e);
                   {sdt}
                 </p>
                 <p>
-                  <b>Address:</b> {address},{city},{country},{postalCode}
+                  <b>Address:</b> {idDiaChi},{apartmentnumber}, {streetnames},{wards},{" "}
+                  {district} ,{city}
                 </p>
               </div>
 

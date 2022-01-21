@@ -7,6 +7,8 @@ import { addToCart } from "../../redux/cart";
 import productApi from "../../api/productApi";
 import Avatar from "react-avatar";
 import Comment from "./comment";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 const DetailProduct = (Props) => {
   const dispatch = useDispatch();
   const productId = Props.match.params.id;
@@ -19,8 +21,8 @@ const DetailProduct = (Props) => {
     const fetchProduct = async () => {
       try {
         const product = await productApi.getId(productId);
-       
-        setItem({ ...product[0] });
+      console.log(product);
+        setItem({ ...product.data });
         console.log(item.comments);
       } catch (error) {
         console.log("Failed to fetch product list: ", error);
@@ -67,14 +69,46 @@ const DetailProduct = (Props) => {
   return (
     <Container className="content">
       <Row className="product-detail">
-        <Col xs="6" md="6" sm="6" lg="6">
-          <img
-            className="product-detailImage"
-            src={item.HinhSanPham?item.HinhSanPham.Url:""}
-            alt="item"
-          ></img>
+        <Col xs="4" md="4" sm="4" lg="4">
+          <Carousel>
+            <img
+              className="product-detailImage"
+              src={item.hinhAnh ? item.hinhAnh.url : ""}
+              alt="item"
+            ></img>
+            <img
+              className="product-detailImage"
+              src={item.hinhAnh ? item.hinhAnh.url : ""}
+              alt="item"
+            ></img>
+            <img
+              className="product-detailImage"
+              src={item.hinhAnh ? item.hinhAnh.url : ""}
+              alt="item"
+            ></img>
+            <img
+              className="product-detailImage"
+              src={item.hinhAnh ? item.hinhAnh.url : ""}
+              alt="item"
+            ></img>
+            <img
+              className="product-detailImage"
+              src={item.hinhAnh ? item.hinhAnh.url : ""}
+              alt="item"
+            ></img>
+            <img
+              className="product-detailImage"
+              src={item.hinhAnh ? item.hinhAnh.url : ""}
+              alt="item"
+            ></img>
+          </Carousel>
         </Col>
-        <Col xs="6" md="6" sm="6" lg="6">
+        <Col
+          xs={{ size: 6, offset: 2 }}
+          md={{ size: 6, offset: 2 }}
+          sm={{ size: 6, offset: 2 }}
+          lg={{ size: 6, offset: 2 }}
+        >
           {/* <div className="product-detailProduct"> */}
           <Row className="product-detailBorderCount ">
             <Col
@@ -84,8 +118,8 @@ const DetailProduct = (Props) => {
               lg={{ size: "12" }}
               className="product-detailName"
             >
-              <h2>{item.Ten}</h2>
-              <p>Cost: ${item.GiaSP}</p>
+              <h2>{item.ten}</h2>
+              <p>Cost: ${item.giaSP}</p>
             </Col>
             <Col xs="12" md="12" sm="12" lg="12">
               <Row>
@@ -140,7 +174,7 @@ const DetailProduct = (Props) => {
       </Row>
       <Row className="product-describe">
         <h5>Describe:</h5>
-        <p>{item.description}</p>
+        <p>{item.moTa}</p>
       </Row>
 
       <Row className="product-comment">

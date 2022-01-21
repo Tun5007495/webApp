@@ -12,7 +12,7 @@ export default function Rating(Props) {
               : "fas fa-star-half-alt"
             : "far fa-star"
         }
-        style={{ color: "#e6e600" }}
+        style={{ color: "#FF4500" }}
       ></i>
       <i
         className={
@@ -22,7 +22,7 @@ export default function Rating(Props) {
               : "fas fa-star-half-alt"
             : "far fa-star"
         }
-        style={{ color: "#e6e600" }}
+        style={{ color: "#FF4500" }}
       ></i>
       <i
         className={
@@ -32,7 +32,7 @@ export default function Rating(Props) {
               : "fas fa-star-half-alt"
             : "far fa-star"
         }
-        style={{ color: "#e6e600" }}
+        style={{ color: "#FF4500" }}
       ></i>
       <i
         className={
@@ -42,7 +42,7 @@ export default function Rating(Props) {
               : "fas fa-star-half-alt"
             : "far fa-star"
         }
-        style={{ color: "#e6e600" }}
+        style={{ color: "#FF4500" }}
       ></i>
       <i
         className={
@@ -52,7 +52,7 @@ export default function Rating(Props) {
               : "fas fa-star-half-alt"
             : "far fa-star"
         }
-        style={{ color: "#e6e600" }}
+        style={{ color: "#FF4500" }}
       ></i>
     </div>
   );

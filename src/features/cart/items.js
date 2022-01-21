@@ -8,18 +8,19 @@ import CartEmpty from "./cartEmpty";
 const CartIndex = (Props) => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.cartItems);
-  // console.log("11111111111111111111", items);
+  console.log("11111111111111111111", items);
   useEffect(() => {}, [items]);
   const deleteI = (_id) => {
     dispatch(deleteItem(_id));
   };
   const add = (item) => {
+    // console.log("item",item);
     let temp = { ...item };
     temp.count = 1;
     dispatch(addToCart(temp));
   };
-  const reduce = (_id) => {
-    dispatch(reduceItem(_id));
+  const reduce = (id) => {
+    dispatch(reduceItem(id));
   };
 
   return (
@@ -28,11 +29,11 @@ const CartIndex = (Props) => {
         <div>
           {items.map((item) => (
             <CartItem
-              key={item.ID}
+              key={item.Id}
               item={item}
-              onClickDelete={() => deleteI(item.ID)}
+              onClickDelete={() => deleteI(item.Id)}
               onClickSetCart={() => add(item)}
-              onClickReduce={() => reduce(item.ID)}
+              onClickReduce={() => reduce(item.Id)}
             ></CartItem>
           ))}
           <Order {...Props}></Order>

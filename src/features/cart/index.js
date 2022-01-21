@@ -11,7 +11,7 @@ const CartIndex = (Props) => {
   //const count = useSelector((state) => state.cart.count);
   const userSignin = useSelector((state) => state.auth);
   const { userInfor } = userSignin;
-
+  console.log(userInfor);
   if (!userInfor) {
     Props.history.push("/signin");
   }

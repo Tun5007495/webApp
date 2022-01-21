@@ -7,11 +7,14 @@
 
   margin: 1rem;
   border-style: outset;
+  background-color: rgb(209, 231, 200);
+  width: 250px;
+  height: 200px;
 }
 .products-item .products-itemImage {
   object-fit: contain;
-  width: 17rem;
-  height: 17rem;
+  max-width: 10rem;
+  max-height: 10rem;
   border-radius: 10px;
 }
 .products-item .icon-heart {
@@ -20,11 +23,11 @@
   bottom: 16rem;
 }
 .products-item .products-itemButton {
-  width: 10rem;
+  width: 7rem;
 }
 .product-detailImage {
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 .product-buttonGroup {
@@ -33,22 +36,19 @@
   text-align: center;
 }
 
-.product-detailName{
+.product-detailName {
   height: 10rem;
 }
 .p-count {
   border: 1px solid black;
   height: 2rem;
   width: 100%;
-  
 }
 .p-reduce {
   border-left: 1px solid black;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   border-radius: 5px 0px 0px 5px;
- 
- 
 }
 .p-increase {
   height: 2rem;
@@ -138,16 +138,13 @@
   justify-content: center;
 }
 
-.comment-display{
-  
+.comment-display {
   margin: 1rem;
   width: 80%;
 }
-.comment-display .word-wrap{
- 
+.comment-display .word-wrap {
   word-break: break-all;
- 
 }
-.product-comment .comment-title{
+.product-comment .comment-title {
   width: 100%;
 }

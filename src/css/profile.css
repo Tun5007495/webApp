@@ -1,17 +1,42 @@
-.profile .profile-avatar{
-    width:16rem;
-    height: 16rem;
-    border-radius: 8rem;
-    font-size: 20rem;
+.profile .profile-avatar {
+  width: 16rem;
+  height: 16rem;
+  border-radius: 8rem;
+  font-size: 20rem;
+}
+.profile {
+  background-color: white;
+}
+.profile .status_name {
+  font-size: 80%;
+}
+.profile .quan_li_tai_khoan button {
+  padding: 0;
+  border: none;
+  background: none;
+}
 
+.profile .list_quan_li_tai_khoan {
+  list-style: none;
+  display: flex;
 }
-.profile{
-    background-color: white;
-    padding: 3rem;
+.profile .list_quan_li_tai_khoan li {
+   margin-right: 40px; 
 }
-.profile .profile-buttonLogout{
-    width: 10rem;
-    background-color: orangered;
-    margin-top: 3rem;
-    margin-left: 3rem;
+.active {
+  border-bottom: 2px solid red;
+  color: red;
+  background-color: #f9f9f9;
+}
+.profile .group_user {
+  text-align: center;
+}
+.profile h2 {
+  text-align: center;
+}
+.profile .profile-buttonLogout {
+  width: 10rem;
+  background-color: orangered;
+  margin-top: 3rem;
+  margin-left: 3rem;
 }

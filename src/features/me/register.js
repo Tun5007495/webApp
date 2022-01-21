@@ -1,7 +1,7 @@
-import firebase from "firebase";
+// import firebase from "firebase";
 import React, { useState, useEffect } from "react";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import { useSelector, useDispatch } from "react-redux";
+// import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+// import { useDispatch } from "react-redux";
 
 import {
   Button,
@@ -14,28 +14,30 @@ import {
   Row,
 } from "reactstrap";
 import logo from "../../assets/logo192.png";
-import { signIn } from "../../redux/auth";
+// import { signIn } from "../../redux/auth";
 import loginApi from "../../api/userApi";
-const uiConfig = {
-  // Popup signin flow rather than redirect flow.
-  signInFlow: "redirect",
-  signInSuccessUrl: "/",
-  // We will display Google and Facebook as auth providers.
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    //firebase.auth.FacebookAuthProvider.PROVIDER_ID
-  ],
-};
+import Cookies from "js-cookie";
+// const uiConfig = {
+//   // Popup signin flow rather than redirect flow.
+//   signInFlow: "redirect",
+//   signInSuccessUrl: "/",
+//   // We will display Google and Facebook as auth providers.
+//   signInOptions: [
+//     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+//     //firebase.auth.FacebookAuthProvider.PROVIDER_ID
+//   ],
+// };
 const Signin = (Props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [checkPassword,setCheckPassword] = useState("");
   const [email, setEmail] = useState("");
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const redirect = Props.location.search
     ? Props.location.search.split("=")[1]
     : "/profile";
 
-  const userInfor = useSelector((state) => state.auth.userInfor);
+  const userInfor = Cookies.get("userInfor");
 
   useEffect(() => {
     if (userInfor) {
@@ -51,15 +53,20 @@ const Signin = (Props) => {
 
   const submit = async (infor) => {
     try {
-      // const params = { _page: 1, _limit: 10 };
-      const data = await loginApi.registerUser(infor);
+      if(checkPassword === password){
+        // const params = { _page: 1, _limit: 10 };
+        const data = await loginApi.registerUser(infor);
 
-      localStorage.setItem("userInfor", JSON.stringify(data));
-      //console.log(localStorage.getItem('userInfor'));
+        // localStorage.setItem("userInfor", JSON.stringify(data));
+        //console.log(localStorage.getItem('userInfor'));
 
-      if (data) {
-        dispatch(signIn());
+        if (data) {
+          Cookies.set(JSON.stringify(data));
+          // dispatch(signIn());
+          Props.history.push("/signin");
+        }
       }
+    
 
       // console.log("Fetch products successfully: ", response.data);
     } catch (error) {
@@ -119,17 +126,17 @@ const Signin = (Props) => {
                   name="password"
                   id="examplePassword"
                   placeholder="Password"
-                  onChange={(event) => setPassword(event.target.value)}
+                  onChange={(event) => setCheckPassword(event.target.value)}
                 />
               </FormGroup>
               <Button onClick={() => submit({ username, password ,email})}>
                 {" "}
                 <b>Submit</b>
               </Button>{" "}
-              <StyledFirebaseAuth
+              {/* <StyledFirebaseAuth
                 uiConfig={uiConfig}
                 firebaseAuth={firebase.auth()}
-              />
+              /> */}
             </Form>
           </div>
         </Col>

@@ -1,12 +1,17 @@
 import axiosClient from "./axiosClient";
+import axios from "axios";
 const ProductApi = {
   getAll: () => {
-    const url = "/api/sanpham/tatcasanpham";
-    return axiosClient.get(url);
+    // const url = "/api/sanpham/tatcasanpham";
+    return axios.get("http://localhost:8080/api/san-pham");
   },
   getId: (params) => {
-    const url = "/api/sanpham/sanpham/" + params;
-    return axiosClient.get(url);
+    // const url = "/api/sanpham/sanpham/" + params;
+    return axios.get("http://localhost:8080/api/san-pham/" + params);
+  },
+  searchByName: (query) => {
+    // const url = "/api/sanpham/sanpham/" + params;
+    return axiosClient.get("api/SanPham/SanPhamTheoTen?name=" + query);
   },
   // getAll: () => {
   //   const url = "/products";

@@ -83,16 +83,16 @@ const productsSlice = createSlice({
   name: "productsRedux",
   initialState,
   reducers: {
-    signOut(state) {
-      state.userInfor = null;
-      localStorage.removeItem("userInfor");
-      // state.categoris = action.payload.categoris;
-    },
-    signIn(state) {
-      state.userInfor = localStorage.getItem("userInfor")
-        ? JSON.parse(localStorage.getItem("userInfor"))
-        : null;
-    },
+    // signOut(state) {
+    //   state.userInfor = null;
+    //   localStorage.removeItem("userInfor");
+    //   // state.categoris = action.payload.categoris;
+    // },
+    // signIn(state) {
+    //   state.userInfor = localStorage.getItem("userInfor")
+    //     ? JSON.parse(localStorage.getItem("userInfor"))
+    //     : null;
+    // },
     setStatusProducts(state, action) {
       const index = state.products.findIndex(
         (item) => item.id === action.payload
