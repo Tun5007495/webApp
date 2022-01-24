@@ -13,6 +13,10 @@ const ProductApi = {
     // const url = "/api/sanpham/sanpham/" + params;
     return axiosClient.get("api/SanPham/SanPhamTheoTen?name=" + query);
   },
+  getSPbyPrice:(params)=>{
+     return axios.get(`http://localhost:8080/api/san-pham-gia/${params.from}/${params.to}`);
+ 
+  }
   // getAll: () => {
   //   const url = "/products";
   //   return axiosClient.get(url);

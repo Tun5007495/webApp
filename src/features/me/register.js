@@ -17,6 +17,7 @@ import logo from "../../assets/logo192.png";
 // import { signIn } from "../../redux/auth";
 import loginApi from "../../api/userApi";
 import Cookies from "js-cookie";
+import ShipperImgae from "../../assets/shipper.png";
 // const uiConfig = {
 //   // Popup signin flow rather than redirect flow.
 //   signInFlow: "redirect",
@@ -77,7 +78,10 @@ const Signin = (Props) => {
   return (
     <Container className="content">
       <Row>
-        <Col sm={{ size: 5, offset: 4 }}>
+        <Col sm="7">
+          <img lassName="image_Shipper" src={ShipperImgae}></img>
+        </Col>
+        <Col sm={{ size: 5 }}>
           <div className="login">
             <div className="login-logo">
               <img
@@ -129,7 +133,7 @@ const Signin = (Props) => {
                   onChange={(event) => setCheckPassword(event.target.value)}
                 />
               </FormGroup>
-              <Button onClick={() => submit({ username, password ,email})}>
+              <Button onClick={() => submit({ username, password, email })}>
                 {" "}
                 <b>Submit</b>
               </Button>{" "}

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 //import { Col, Row } from "reactstrap";
 //import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import {
@@ -10,17 +10,34 @@ import {
   NavItem,
   Input,
   InputGroup,
-  InputGroupText
-
-
-} from 'reactstrap';
+  InputGroupText,
+} from "reactstrap";
 import { Link } from "react-router-dom";
 import "../css/header.css";
 import Logo from "../assets/logo192.png";
-const Example = () => {
+
+import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+const Example = (Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  let history = useHistory();
+  
 
   const toggle = () => setIsOpen(!isOpen);
+  const searchHandle = async () => {
+    if (search === "") {
+      history.push("/");
+    } else {
+      history.push("/home?name=" + search);
+    }
+    // const listProduct = await productApi.searchByName(search);
+    // console.log("list", listProduct);
+    // if (listProduct.length > 0) {
+    //   // setProducts(listProduct);
+    // }
+    setSearch("");
+  };
   return (
     <div className="header">
       <div>
@@ -49,7 +66,16 @@ const Example = () => {
                 </Link>
               </NavItem>
             </Nav>
-          
+            <InputGroup>
+              <Input
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Nhập từ khoá"
+                value={search}
+              />
+              <InputGroupText onClick={() => searchHandle()}>
+                search
+              </InputGroupText>
+            </InputGroup>
           </Collapse>
         </Navbar>
       </div>
@@ -92,4 +118,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default withRouter(Example);

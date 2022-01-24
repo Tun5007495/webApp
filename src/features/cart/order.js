@@ -30,7 +30,7 @@ const handleOrder = ()=>{
         </Col>
         <Col>
           <div>
-            <Button className="cart-buttonBuy" color="danger" onClick={handleOrder}>
+            <Button className="cart-buttonBuy" color="success" onClick={handleOrder}>
               Mua Hàng
             </Button>
           </div>

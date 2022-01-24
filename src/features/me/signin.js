@@ -17,6 +17,7 @@ import logo from "../../assets/logo192.png";
 // import { signIn } from "../../redux/auth";
 import loginApi from "../../api/userApi";
 import Cookies from "js-cookie";
+import ShipperImgae from "../../assets/shipper.png"
 // const uiConfig = {
 //   // Popup signin flow rather than redirect flow.
 //   signInFlow: "redirect",
@@ -71,7 +72,10 @@ const Signin = (Props) => {
   return (
     <Container className="content">
       <Row>
-        <Col sm={{ size: 5, offset: 4 }}>
+        <Col sm="7">
+          <img lassName="image_Shipper" src={ShipperImgae}></img>
+        </Col>
+        <Col sm={{ size: 5  }}>
           <div className="login">
             <div className="login-logo">
               <img
@@ -86,7 +90,7 @@ const Signin = (Props) => {
               <FormGroup>
                 <Label for="exampleEmail">Username</Label>
                 <Input
-                 type="text"
+                  type="text"
                   name="email"
                   id="exampleEmail"
                   placeholder="Email"
@@ -107,11 +111,11 @@ const Signin = (Props) => {
               <Button onClick={() => submit({ username, password })}>
                 {" "}
                 <b>Log in</b>
-              </Button>
-              {" "}
+              </Button>{" "}
               <Button>
-              
-                <Link to="/register"><b>register</b></Link>
+                <Link to="/register">
+                  <b>register</b>
+                </Link>
               </Button>
               {/* <StyledFirebaseAuth
                 uiConfig={uiConfig}

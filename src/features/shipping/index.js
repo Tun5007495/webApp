@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setShippingAddress } from "../../redux/cart";
 import CheckSteps from "../../components/checksteps.js";
 import addressApi from "../../api/addressApi";
+import Cookies from "js-cookie";
 import {
   Container,
   Col,
@@ -31,10 +32,10 @@ const Shipping = (Props) => {
   const [country, setCountry] = useState();
   const [postalCode, setPostalCode] = useState();
   const dispatch = useDispatch();
-  const userSignin = useSelector((state) => state.auth);
+ 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-  const { userInfor } = userSignin;
+ 
   const [activeTab, setActiveTab] = useState("1");
   const [option, setOption] = useState("1");
   const [change, setChange] = useState({
@@ -42,6 +43,11 @@ const Shipping = (Props) => {
     currentPage: 1,
     keyword: "",
   });
+   const userInfor = JSON.parse(Cookies.get("userInfor"));
+   console.log(userInfor);
+   if (!userInfor) {
+     Props.history.push("/signin/redirect=/");
+   }
   const toggle = (tab) => {
     console.log(tab);
     if (activeTab !== tab) setActiveTab(tab);
@@ -89,9 +95,9 @@ const Shipping = (Props) => {
   useEffect(() => {
     try {
       const getAddress = async () => {
-        const data = await addressApi.getDiaChiById(6);
+        const data = await addressApi.getDiaChiById(userInfor.Id);
         setListAddress(data);
-        console.log("data", data);
+   
       };
       getAddress();
     } catch (error) {

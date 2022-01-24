@@ -13,7 +13,7 @@ const CartItem = (Props) => {
               <div>
                 <img
                   className="cart-itemImage"
-                  src={item?item.image:""}
+                  src={item ? item.image : ""}
                   alt="products"
                 ></img>
               </div>
@@ -60,7 +60,7 @@ const CartItem = (Props) => {
               <div>
                 <Button
                   className="cart-buttonItem"
-                  color="danger"
+                  color="success"
                   onClick={onClickDelete}
                 >
                   Xóa

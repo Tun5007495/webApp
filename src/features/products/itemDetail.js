@@ -73,32 +73,32 @@ const DetailProduct = (Props) => {
           <Carousel>
             <img
               className="product-detailImage"
-              src={item.hinhAnh ? item.hinhAnh.url : ""}
+              src={item.hinhAnh ? item.hinhAnh.Url : ""}
               alt="item"
             ></img>
             <img
               className="product-detailImage"
-              src={item.hinhAnh ? item.hinhAnh.url : ""}
+              src={item.hinhAnh ? item.hinhAnh.Url : ""}
               alt="item"
             ></img>
             <img
               className="product-detailImage"
-              src={item.hinhAnh ? item.hinhAnh.url : ""}
+              src={item.hinhAnh ? item.hinhAnh.Url : ""}
               alt="item"
             ></img>
             <img
               className="product-detailImage"
-              src={item.hinhAnh ? item.hinhAnh.url : ""}
+              src={item.hinhAnh ? item.hinhAnh.Url : ""}
               alt="item"
             ></img>
             <img
               className="product-detailImage"
-              src={item.hinhAnh ? item.hinhAnh.url : ""}
+              src={item.hinhAnh ? item.hinhAnh.Url : ""}
               alt="item"
             ></img>
             <img
               className="product-detailImage"
-              src={item.hinhAnh ? item.hinhAnh.url : ""}
+              src={item.hinhAnh ? item.hinhAnh.Url : ""}
               alt="item"
             ></img>
           </Carousel>

@@ -11,7 +11,7 @@ const Example = (Props) => {
       <Link to={`/product/${item.id || item.Id}`}>
         <img
           className="products-itemImage"
-          src={item.hinhAnh?.url || item.HinhSanPham?.Url}
+          src={item.hinhAnh?.Url || item.HinhSanPham?.Url}
           alt="item"
         ></img>
         {/* <div className="icon-heart">

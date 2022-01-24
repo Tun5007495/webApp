@@ -7,7 +7,7 @@
 
   margin: 1rem;
   border-style: outset;
-  background-color: rgb(209, 231, 200);
+  background-color: #aae49d;
   width: 250px;
   height: 200px;
 }
@@ -59,7 +59,7 @@
   width: 1rem;
 }
 .products-detailBuy {
-  background-color: orangered;
+  background-color: #69D84F;
   width: 70%;
   height: 3rem;
   text-align: center;
@@ -67,8 +67,8 @@
 }
 .products-detailAddToCart {
   background-color: rgb(238, 219, 200);
-  border: red solid 1px;
-  color: red;
+  border: #69D84F solid 1px;
+  color: black;
   height: 3rem;
   margin-right: 2rem;
   width: 70%;
@@ -126,7 +126,7 @@
   width: 7rem;
   height: 3rem;
   border: 1px solid grey;
-  background-color: hsl(39, 100%, 50%);
+  background-color: #69D84F;
   margin-left: 1rem;
 }
 .product-comment .comment-form {
