@@ -1,4 +1,15 @@
-.products {
+.content_product{
+  margin: 50px;
+}
+.first_price,.last_price {
+  display: inline;
+    margin-bottom: 15px;
+ border: none;
+width: 50px;
+}
+.price_filter  #amount {
+    margin-bottom: 27px;
+    margin-top: 20px;
 }
 .products-item {
   padding: 1rem;
@@ -7,9 +18,9 @@
 
   margin: 1rem;
   border-style: outset;
-  background-color: #aae49d;
+  background-color: white;
   width: 250px;
-  height: 200px;
+  height: 250px;
 }
 .products-item .products-itemImage {
   object-fit: contain;
@@ -38,6 +49,16 @@
 
 .product-detailName {
   height: 10rem;
+  
+}
+.products-item .name{
+
+ white-space: nowrap; 
+  width: 150px; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+ 
+
 }
 .p-count {
   border: 1px solid black;
@@ -59,16 +80,16 @@
   width: 1rem;
 }
 .products-detailBuy {
-  background-color: #69D84F;
+  /* background-color: #69D84F; */
   width: 70%;
   height: 3rem;
   text-align: center;
   margin: 1rem;
 }
 .products-detailAddToCart {
-  background-color: rgb(238, 219, 200);
-  border: #69D84F solid 1px;
-  color: black;
+  /* background-color: rgb(238, 219, 200); */
+  /* border: #69D84F solid 1px; */
+  /* color: black; */
   height: 3rem;
   margin-right: 2rem;
   width: 70%;
@@ -147,4 +168,36 @@
 }
 .product-comment .comment-title {
   width: 100%;
+}
+.price_filter .button-shop {
+    background: #69D84F none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 30px;
+    color: #fff;
+    padding: 0 15px;
+    float: right;
+    height: 30px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.4s ease 0s;
+}
+.price_filter .button-shop i {
+    color: #fff;
+    font-size: 11px;
+    font-weight: 400;
+}
+.price_filter .ui-slider-range {
+    background: #69D84F none repeat scroll 0 0;
+}
+.price_filter .ui-slider-handle.ui-state-default.ui-corner-all {
+    background: #69D84F none repeat scroll 0 0;
+    border: medium none !important;
+    border-radius: 1em;
+    box-shadow: none !important;
+    cursor: ew-resize;
+    height: 1em;
+    outline: 0 none;
+    position: absolute;
+    width: 1em;
+    z-index: 2;
 }

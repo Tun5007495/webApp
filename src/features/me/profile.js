@@ -5,7 +5,9 @@ import classnames from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import userDefaut from "../../assets/user.png";
+ 
 import {
   Button,
   Col,
@@ -60,7 +62,7 @@ const Profile = (Props) => {
     currentPage: 1,
     keyword: "",
   });
-
+console.log(1);
   if (!userInfor) {
     Props.history.push("/signin");
   }
@@ -91,7 +93,7 @@ const Profile = (Props) => {
 
         setListOrder(ListOrder.data);
 
-        console.log("da", ListOrder.data);
+        console.log("da", listTT.data.reverse());
         listTT.data.unshift({ id: 0, ten: "Tất cả" });
 
         setListTrangThai(listTT.data);
@@ -122,10 +124,7 @@ const Profile = (Props) => {
       }
     }
   };
-  function reverseString(str) {
-    let temp = str.split("-");
-    return temp[2] + "-" + temp[1] + "-" + temp[0];
-  }
+
   const handleFeedback = async (data) => {
     try {
       console.log("data", data);
@@ -168,11 +167,13 @@ const Profile = (Props) => {
     //
   };
   const handleSetDiem = (item)=>{
+    setDiem(item);
 console.log("diem",item);
   }
   return (
     <Container className="content">
       <ToastContainer />
+      <Button color="success"  onClick={()=>logout()}>Đăng xuất</Button>
       <div className="profile">
         <h2>
           <b>Tài khoản của bạn</b>
@@ -217,20 +218,20 @@ console.log("diem",item);
               <TabContent activeTab={activeTab}>
                 <TabPane tabId="1">
                   <Row>
-                    <Col>
+                    <Col className="Quan_Ly_Tai_Khoan">
                       <hr />
-                      <div>
+                    <h3>
                         {userInfor?.username
                           ? "username: " + userInfor.username
                           : ""}
-                      </div>
-                      <div>
+                      </h3>
+                      <h4>
                         {userInfor?.email ? "email: " + userInfor.email : ""}
-                      </div>
-                      <div>{userInfor?.SDT ? "SDT: " + userInfor.SDT : ""}</div>
-                      <div>
+                      </h4>
+                       <h4>{userInfor?.SDT ? "SDT: " + userInfor.SDT : ""} </h4>
+                      <h4>
                         <b>{userInfor?.GioiTinh ? userInfor.GioiTinh : ""}</b>
-                      </div>
+                      </h4>
 
                       <p>
                         {" "}
@@ -322,7 +323,7 @@ console.log("diem",item);
                         <Table>
                           <thead>
                             <tr>
-                              <th>#</th>
+                              <th>Id</th>
                               <th>Đơn hàng</th>
                               <th>Tổng tiền</th>
                               <th>Thời gian đặt hàng</th>
@@ -335,8 +336,8 @@ console.log("diem",item);
                             {listOrder
                               ? listOrder.map((item, index) => {
                                   return (
-                                    <tr>
-                                      <th scope="row">{index}</th>
+                                    <tr key={index}>
+                                      <th scope="row">{item.id}</th>
                                       <td>Jacob</td>
                                       <td>${item.tongTien}</td>
                                       <td>{item.ngayMuaHang}</td>
@@ -440,7 +441,6 @@ console.log("diem",item);
                                                       <Col sm="9">
                                                         <div className="d-flex  p-2">
                                                           <Dropdown
-                                                          
                                                             isOpen={
                                                               dropdownOpen
                                                             }
@@ -467,15 +467,15 @@ console.log("diem",item);
                                                                         index
                                                                       }
                                                                       onClick={() => {
-                                                                        handleSetDiem(item);
+                                                                        handleSetDiem(
+                                                                          item
+                                                                        );
                                                                         setDiem(
                                                                           item
                                                                         );
                                                                       }}
                                                                     >
-                                                                   
-                                                                        {item}
-                                                                     
+                                                                      {item}
                                                                     </DropdownItem>
                                                                   );
                                                                 }
@@ -485,7 +485,7 @@ console.log("diem",item);
                                                         </div>
                                                       </Col>
                                                       <Col
-                                                        sm="3"
+                                                        size="3"
                                                         style={{
                                                           padding: "1rem",
                                                         }}
@@ -493,16 +493,26 @@ console.log("diem",item);
                                                         Nhận xét:
                                                       </Col>
                                                       <Col
-                                                        sm="9"
+                                                        size="9"
                                                         style={{
                                                           padding: "1rem",
                                                         }}
                                                       >
-                                                        <input
+                                                        <textarea
+                                                          className="input-feedback"
+                                                          placeholder="Nhập đánh giá cửa hàng"
+                                                          onChange={(e) =>
+                                                            setFeedback(
+                                                              e.target.value
+                                                            )
+                                                          }
+                                                          value={Feedback}
+                                                        ></textarea>
+                                                        {/* <input
                                                           className="input-shipping"
                                                           id="fullname"
                                                           type="text"
-                                                          placeholder="nhập đánh giá cửa hàng"
+                                                          placeholder="Nhập đánh giá cửa hàng"
                                                           value={Feedback}
                                                           onChange={(e) =>
                                                             setFeedback(
@@ -510,7 +520,7 @@ console.log("diem",item);
                                                             )
                                                           }
                                                           required
-                                                        ></input>
+                                                        ></input> */}
                                                       </Col>
                                                     </Row>
                                                   </TabPane>
@@ -531,7 +541,6 @@ console.log("diem",item);
                                                                 !dropdownOpen
                                                               );
                                                             }}
-                                                         
                                                           >
                                                             <DropdownToggle
                                                               caret
@@ -550,10 +559,10 @@ console.log("diem",item);
                                                                         index
                                                                       }
                                                                       onClick={() => {
-                                                                      handleSetDiem(1)
-                                                                        setDiem(
-                                                                          item
+                                                                        handleSetDiem(
+                                                                        item
                                                                         );
+                                                                       
                                                                       }}
                                                                     >
                                                                       {item}
@@ -566,7 +575,7 @@ console.log("diem",item);
                                                         </div>
                                                       </Col>
                                                       <Col
-                                                        sm="3"
+                                                        size="3"
                                                         style={{
                                                           padding: "1rem",
                                                         }}
@@ -574,12 +583,22 @@ console.log("diem",item);
                                                         Nhận xét:
                                                       </Col>
                                                       <Col
-                                                        sm="9"
+                                                        size="9"
                                                         style={{
                                                           padding: "1rem",
                                                         }}
                                                       >
-                                                        <input
+                                                        <textarea
+                                                          className="input-feedback"
+                                                          placeholder="Nhập đánh giá shipper"
+                                                          onChange={(e) =>
+                                                            setFeedback(
+                                                              e.target.value
+                                                            )
+                                                          }
+                                                          value={Feedback}
+                                                        ></textarea>
+                                                        {/* <input
                                                           className="input-shipping"
                                                           id="fullname"
                                                           type="text"
@@ -591,7 +610,7 @@ console.log("diem",item);
                                                             )
                                                           }
                                                           required
-                                                        ></input>
+                                                        ></input> */}
                                                       </Col>
                                                     </Row>
                                                   </TabPane>

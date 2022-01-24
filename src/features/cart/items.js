@@ -8,7 +8,7 @@ import CartEmpty from "./cartEmpty";
 const CartIndex = (Props) => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.cartItems);
-  console.log("11111111111111111111", items);
+
   useEffect(() => {}, [items]);
   const deleteI = (_id) => {
     dispatch(deleteItem(_id));

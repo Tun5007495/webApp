@@ -9,6 +9,8 @@ import Avatar from "react-avatar";
 import Comment from "./comment";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const DetailProduct = (Props) => {
   const dispatch = useDispatch();
   const productId = Props.match.params.id;
@@ -35,20 +37,25 @@ const DetailProduct = (Props) => {
   const [count, setCount] = useState(0);
 
   let addItem = () => {
-    if (count) {
+    try {
+        if (count) {
+          item.count = count;
 
-      item.count = count;
-
-      dispatch(addToCart({ ...item }));
-      setCount(0);
+          dispatch(addToCart({ ...item }));
+          setCount(0);
+          toast.success("Thêm sản phẩm vào giỏ hàng thành công!")
+        }
+    } catch (error) {
+      toast.warning("Thêm sản phẩm thất bại!");
     }
+  
   };
   const checkoutHandler = () => {
     if (count) {
       item.count = count;
       dispatch(addToCart({ ...item }));
       setCount(0);
-      Props.history.push("/signin?redirect=cart");
+       Props.history.push("/cart");
     }
   };
   const handleChange = (event) => {
@@ -67,7 +74,8 @@ const DetailProduct = (Props) => {
     callApi();
   };
   return (
-    <Container className="content">
+    <div className="content">
+      <ToastContainer />;
       <Row className="product-detail">
         <Col xs="4" md="4" sm="4" lg="4">
           <Carousel>
@@ -104,10 +112,10 @@ const DetailProduct = (Props) => {
           </Carousel>
         </Col>
         <Col
-          xs={{ size: 6, offset: 2 }}
-          md={{ size: 6, offset: 2 }}
-          sm={{ size: 6, offset: 2 }}
-          lg={{ size: 6, offset: 2 }}
+          xs={{ size: 6, offset: 1 }}
+          md={{ size: 6, offset: 1 }}
+          sm={{ size: 6, offset: 1 }}
+          lg={{ size: 6, offset: 1 }}
         >
           {/* <div className="product-detailProduct"> */}
           <Row className="product-detailBorderCount ">
@@ -160,12 +168,17 @@ const DetailProduct = (Props) => {
               <Button
                 onClick={() => addItem()}
                 className="products-detailAddToCart"
+                color="warning"
               >
                 Add to cart
               </Button>
             </Col>
             <Col xs="12" md="12" sm="12" lg="6">
-              <Button onClick={checkoutHandler} className="products-detailBuy">
+              <Button
+                onClick={checkoutHandler}
+                color="success"
+                className="products-detailBuy"
+              >
                 Buy
               </Button>
             </Col>
@@ -176,7 +189,6 @@ const DetailProduct = (Props) => {
         <h5>Describe:</h5>
         <p>{item.moTa}</p>
       </Row>
-
       <Row className="product-comment">
         <Col sm="1" className="comment-title">
           {" "}
@@ -207,12 +219,13 @@ const DetailProduct = (Props) => {
 
             <Row>
               <Col sm={{ offset: 1 }}>
-                <button
+                <Button
+                  disabled
                   className="comment-buttonSubmit"
                   onClick={handleSubmitComment}
                 >
                   post
-                </button>
+                </Button>
               </Col>
             </Row>
           </form>
@@ -226,7 +239,7 @@ const DetailProduct = (Props) => {
             ))
           : ""}
       </Row>
-    </Container>
+    </div>
   );
 };
 

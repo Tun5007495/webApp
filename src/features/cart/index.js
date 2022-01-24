@@ -32,9 +32,9 @@ const CartIndex = (Props) => {
   // }, [dispatch]);
 
   return (
-    <Container className="content">
+    <div className="content">
       <Items />
-    </Container>
+    </div>
   );
 };
 

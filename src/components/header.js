@@ -66,14 +66,17 @@ const Example = (Props) => {
                 </Link>
               </NavItem>
             </Nav>
-            <InputGroup>
+            <InputGroup className="search-box">
               <Input
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Nhập từ khoá"
                 value={search}
               />
-              <InputGroupText onClick={() => searchHandle()}>
-                search
+              <InputGroupText
+                style={{ backgroundColor: "#69D84F",color:"white" }}
+                onClick={() => searchHandle()}
+              >
+                Tìm kiếm
               </InputGroupText>
             </InputGroup>
           </Collapse>

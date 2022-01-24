@@ -1,12 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 //import { setShippingAddress } from "../../redux/cart";
+import { deleteCart } from "../../redux/cart";
 import CheckSteps from "../../components/checksteps.js";
 import { Container, Row, Col } from "reactstrap";
 import OrderItems from "./orderItem";
 import "../../css/placeOrder.css";
 import OrderApi from "../../api/orderApi";
 import Cookies from "js-cookie";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+{
+  /* <ToastContainer />; */
+}
 // import { ToastContainer, toast } from "react-toastify";
 const PlaceOrder = (Props) => {
   //   const [fullname, setFullname] = useState();
@@ -14,6 +20,7 @@ const PlaceOrder = (Props) => {
   //   const [city, setCity] = useState();
   //   const [country, setCountry] = useState();
   //   const [postalCode, setPostalCode] = useState();
+  const dispatch = useDispatch();
   const stateCart = useSelector((state) => state.cart);
   const {
     idDiaChi,
@@ -68,13 +75,20 @@ const PlaceOrder = (Props) => {
       console.log("1", donHang);
 
       const callApi = async () => {
-        await OrderApi.order({
+        const order = await OrderApi.order({
           ...donHang,
         });
+        if(order){
+          toast.success("Đặt hàng thành công!");
+          dispatch(deleteCart());
+          Props.history.push("/");
+        }else{
+          toast.warning("Đặt hàng thất bại!");
+        }
       };
 
       const temp = callApi();
-      console.log("2", temp);
+      // console.log("2", temp);
       // if () {
       //   Props.history.push("/home");
       // }
@@ -84,7 +98,8 @@ const PlaceOrder = (Props) => {
   };
 
   return (
-    <Container className="content">
+    <div className="content">
+       <ToastContainer />;
       <CheckSteps step1 step2 step3 step4></CheckSteps>
 
       <form className="form-placeOrder">
@@ -145,7 +160,7 @@ const PlaceOrder = (Props) => {
           </Col>
         </Row>
       </form>
-    </Container>
+    </div>
   );
 };
 

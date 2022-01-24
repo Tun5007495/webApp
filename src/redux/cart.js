@@ -200,10 +200,6 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     setShippingAddress(state, action) {
-      // if(action.payload.count){
-      //   state = {...action.payload};
-      // }
-
       state.shippingAddress.fullname = action.payload.fullname;
       state.shippingAddress.apartmentnumber = action.payload.apartmentnumber;
       state.shippingAddress.streetnames = action.payload.streetnames;
@@ -211,7 +207,6 @@ const cartSlice = createSlice({
       state.shippingAddress.district = action.payload.district;
       state.shippingAddress.city = action.payload.city;
       state.shippingAddress.idDiaChi = action.payload.Id;
-
       state.shippingAddress.sdt = action.payload.sdt;
     },
     setPaymentMethod(state, action) {
@@ -244,7 +239,7 @@ const cartSlice = createSlice({
           Id: action.payload.id || action.payload.Id,
           Ten: action.payload.ten || action.payload.Ten,
           SoLuong: action.payload.count,
-          image: action.payload.hinhAnh?.url || action.payload.image,
+          image: action.payload.hinhAnh?.Url || action.payload.image,
           GiaSP: action.payload.giaSP || action.payload.GiaSP,
         });
       } else {
@@ -325,6 +320,10 @@ const cartSlice = createSlice({
       //   items: arr,
       // };
     },
+    deleteCart(state, action) {
+       state.cartItems = [];
+    },
+   
   },
 });
 
@@ -336,5 +335,6 @@ export const {
   deleteItem,
   setCartCount,
   addToCart,
+  deleteCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;

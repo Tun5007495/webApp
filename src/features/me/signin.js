@@ -17,17 +17,11 @@ import logo from "../../assets/logo192.png";
 // import { signIn } from "../../redux/auth";
 import loginApi from "../../api/userApi";
 import Cookies from "js-cookie";
-import ShipperImgae from "../../assets/shipper.png"
-// const uiConfig = {
-//   // Popup signin flow rather than redirect flow.
-//   signInFlow: "redirect",
-//   signInSuccessUrl: "/",
-//   // We will display Google and Facebook as auth providers.
-//   signInOptions: [
-//     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-//     //firebase.auth.FacebookAuthProvider.PROVIDER_ID
-//   ],
-// };
+import ShipperImgae from "../../assets/Shipper.png"
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+{/* <ToastContainer />; */}
+
 const Signin = (Props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -65,17 +59,19 @@ const Signin = (Props) => {
 
       // console.log("Fetch products successfully: ", response.data);
     } catch (error) {
+      toast.warning("Đăng nhập thất bại!"+error)
       console.log("Failed to login: ", error);
     }
     //dispatch(signIn(infor));
   };
   return (
-    <Container className="content">
+    <div className="content">
+      <ToastContainer />;
       <Row>
-        <Col sm="7">
-          <img lassName="image_Shipper" src={ShipperImgae}></img>
+        <Col className="image_Shipper" sm="5" md="6" lg="7">
+          <img className="image_Shipper_img_login" src={ShipperImgae}></img>
         </Col>
-        <Col sm={{ size: 5  }}>
+        <Col sm="7" md="6" lg="5">
           <div className="login">
             <div className="login-logo">
               <img
@@ -108,15 +104,18 @@ const Signin = (Props) => {
                 />
               </FormGroup>
               <p className="login-forgotPassword">Forgot your password?</p>
-              <Button onClick={() => submit({ username, password })}>
+              <Button
+                color="success"
+                onClick={() => submit({ username, password })}
+              >
                 {" "}
                 <b>Log in</b>
               </Button>{" "}
-              <Button>
-                <Link to="/register">
+              <Link to="/register">
+                <Button color="success">
                   <b>register</b>
-                </Link>
-              </Button>
+                </Button>
+              </Link>
               {/* <StyledFirebaseAuth
                 uiConfig={uiConfig}
                 firebaseAuth={firebase.auth()}
@@ -125,7 +124,7 @@ const Signin = (Props) => {
           </div>
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 };
 

@@ -15,9 +15,11 @@ import {
 } from "reactstrap";
 import logo from "../../assets/logo192.png";
 // import { signIn } from "../../redux/auth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import loginApi from "../../api/userApi";
 import Cookies from "js-cookie";
-import ShipperImgae from "../../assets/shipper.png";
+import ShipperImgae from "../../assets/Shipper.png";
 // const uiConfig = {
 //   // Popup signin flow rather than redirect flow.
 //   signInFlow: "redirect",
@@ -31,6 +33,7 @@ import ShipperImgae from "../../assets/shipper.png";
 const Signin = (Props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   const [checkPassword,setCheckPassword] = useState("");
   const [email, setEmail] = useState("");
   // const dispatch = useDispatch();
@@ -64,8 +67,13 @@ const Signin = (Props) => {
         if (data) {
           Cookies.set(JSON.stringify(data));
           // dispatch(signIn());
+          toast.success("Đăng ký tài khoản thành công!")
           Props.history.push("/signin");
+        }else{
+          toast.warning("Đăng ký tài khoản thất bại!");
         }
+      }else{
+toast.warning("Không khớp mật khẩu!")
       }
     
 
@@ -76,12 +84,13 @@ const Signin = (Props) => {
     //dispatch(signIn(infor));
   };
   return (
-    <Container className="content">
+    <div className="content">
+      <ToastContainer />
       <Row>
-        <Col sm="7">
-          <img lassName="image_Shipper" src={ShipperImgae}></img>
+        <Col className="image_Shipper" sm="5" md="6" lg="7">
+          <img className="image_Shipper_img" src={ShipperImgae}></img>
         </Col>
-        <Col sm={{ size: 5 }}>
+        <Col sm="7" md="6" lg="5">
           <div className="login">
             <div className="login-logo">
               <img
@@ -90,7 +99,7 @@ const Signin = (Props) => {
                 alt="logo"
               />
             </div>
-            <h2>Register</h2>
+            <h2>Đăng ký</h2>
             <hr />
             <Form>
               <FormGroup>
@@ -101,6 +110,7 @@ const Signin = (Props) => {
                   id="exampleEmail"
                   placeholder="Email"
                   onChange={(event) => setEmail(event.target.value)}
+                  required
                 />
               </FormGroup>{" "}
               <FormGroup>
@@ -111,6 +121,7 @@ const Signin = (Props) => {
                   id="exampleEmail"
                   placeholder="username"
                   onChange={(event) => setUsername(event.target.value)}
+                  required
                 />
               </FormGroup>{" "}
               <FormGroup>
@@ -121,6 +132,7 @@ const Signin = (Props) => {
                   id="examplePassword"
                   placeholder="Password"
                   onChange={(event) => setPassword(event.target.value)}
+                  required
                 />
               </FormGroup>
               <FormGroup>
@@ -131,9 +143,13 @@ const Signin = (Props) => {
                   id="examplePassword"
                   placeholder="Password"
                   onChange={(event) => setCheckPassword(event.target.value)}
+                  required
                 />
               </FormGroup>
-              <Button onClick={() => submit({ username, password, email })}>
+              <Button
+                color="success"
+                onClick={() => submit({ username, password, email })}
+              >
                 {" "}
                 <b>Submit</b>
               </Button>{" "}
@@ -145,7 +161,7 @@ const Signin = (Props) => {
           </div>
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 };
 

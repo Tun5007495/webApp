@@ -10,6 +10,8 @@ import {
   DropdownItem,
   Dropdown,
   DropdownMenu,
+  FormGroup,
+  Label,
 } from "reactstrap";
 import "../../css/content.css";
 import Item from "./item";
@@ -32,10 +34,10 @@ const Items = () => {
   const [price, setPrice] = useState(40);
   const [search, setSearch] = useState();
   const [listStore, setListStore] = useState([]);
-  const [store, setStore] = useState();
+  // const [store, setStore] = useState();
   const [dropdownOpen, setdropdownOpen] = useState(false);
   const isBigScreen = useMediaQuery({ query: "(max-width: 990px)" });
-    const isSmallScreen = useMediaQuery({ query: "(max-width: 600px)" });
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 600px)" });
   const [change, setChange] = useState({
     supplier: "",
     category: "",
@@ -64,34 +66,33 @@ const Items = () => {
       currency: "VND",
     });
   };
+
   const hotels = [
     { name: "A", price: 40 },
     { name: "B", price: 50 },
     { name: "C", price: 60 },
   ];
-  const handleInput = async (e) => {
+  const hanldeMoney = async () => {
     const productPrice = await productApi.getSPbyPrice({
-      from: 0,
-      to: e.target.value * 10000,
+      from: value[0],
+      to: value[1],
     });
     if (productPrice.data) {
       setProducts(productPrice.data);
     } else {
       setProducts([]);
     }
-
-    setPrice(e.target.value * 10000);
   };
 
-  const hanldeMoney = () => {
-    if (isBigScreen) setShow(!show);
-    setChange({
-      ...change,
-      price_from: value[0],
-      price_to: value[1],
-      currentPage: 1,
-    });
-  };
+  // const hanldeMoney = () => {
+  //   if (isBigScreen) setShow(!show);
+  //   setChange({
+  //     ...change,
+  //     price_from: value[0],
+  //     price_to: value[1],
+  //     currentPage: 1,
+  //   });
+  // };
   var settings = {
     dots: true,
     infinite: true,
@@ -106,8 +107,9 @@ const Items = () => {
         const getListCuaHang = await StoreApi.getAllStore();
 
         getListCuaHang.unshift({ Id: 0, TenCuaHang: "Tất cả" });
+        console.log("listch", getListCuaHang);
         setListStore(getListCuaHang);
-        setStore(getListCuaHang[0]);
+        // setStore(getListCuaHang[0]);
       } catch (error) {}
     };
     getCuaHang();
@@ -138,15 +140,16 @@ const Items = () => {
     fetchProductList();
   }, [query]);
   const HandleStore = async (e) => {
-    // const getSpByStore =
+
     try {
-      setStore(e);
+      // setStore(e);
       let getListCuaHang;
-      // console.log("e", e);
-      if (e.Id === 0) {
+      console.log("e", e.target.value);
+      if (e.target.value === "0") {
         getListCuaHang = await productApi.getAll();
+        console.log(getListCuaHang);
       } else {
-        getListCuaHang = await StoreApi.getProductByStore(e.Id);
+        getListCuaHang = await StoreApi.getProductByStore(e.target.value);
       }
 
       if (getListCuaHang.data === "") {
@@ -158,18 +161,17 @@ const Items = () => {
     } catch (error) {}
   };
   return (
-    <Container>
-      <div className="content">
-        <Slider {...settings}>
-          <div>
-            <img style={{ minWidth: "100%" }} src={CarouselImage1} />
-          </div>
+    <div className="content_product">
+      <Slider {...settings}>
+        <div>
+          <img style={{ minWidth: "100%" }} src={CarouselImage1} />
+        </div>
 
-          <div>
-            <img style={{ minWidth: "100%" }} src={CarouselImage2} />
-          </div>
-        </Slider>
-        <div className="d-flex  p-5">
+        <div>
+          <img style={{ minWidth: "100%" }} src={CarouselImage2} />
+        </div>
+      </Slider>
+      {/* <div className="d-flex  p-5">
           <h3>Chọn cửa hàng:</h3>
           <Dropdown
             isOpen={dropdownOpen}
@@ -204,51 +206,59 @@ const Items = () => {
           </Dropdown>
           <input type="range" onInput={handleInput} />
           <h3>Price:$0 to ${price}</h3>
-        </div>
-        <ListLeftMoney
-          value={value}
-          rangeSelector={rangeSelector}
-          hanldeMoney={hanldeMoney}
-        />
-        <div className="App">
-          {/* <div>
-            {hotels
-              .filter((hotel) => {
-                return hotel.price > parseInt(price, 10);
-              })
-              .map((hotel) => {
-                return (
-                  <p key={hotel.name}>
-                    {hotel.name} | {hotel.price} &euro;{" "}
-                  </p>
-                );
-              })}
-          </div> */}
-        </div>
-        {/* <Carousel>
-          <div>
-            <img src={CarouselImage1} />
-            <p className="legend">Legend 1</p>
-          </div>
+        </div> */}
 
-          <div>
-            <img src={CarouselImage2} />
-            <p className="legend">Legend 3</p>
-          </div>
-        </Carousel> */}
-        {isLoading === false ? (
-          <LoadingBox />
-        ) : (
-          <Row>
-            {products?.map((item) => (
-              <Col key={item.id} md={3} sm={3} lg={3}>
-                <Item item={item}></Item>
-              </Col>
-            ))}
-          </Row>
-        )}
-      </div>
-    </Container>
+      <Row>
+        <Col sm="2">
+          <ListLeftMoney
+            value={value}
+            rangeSelector={rangeSelector}
+            hanldeMoney={hanldeMoney}
+          />
+          <FormGroup onChange={(e) => HandleStore(e)} check block>
+            Chọn nhà cửa hàng
+            {listStore?.map((item, index) => {
+              return (
+                <div key={index}>
+                  <Label check>
+                    <Input name="list-ch" value={item.Id} type="radio" />{" "}
+                    {item?.TenCuaHang}
+                  </Label>
+                </div>
+              );
+            })}
+            {/* <div>
+                <Label check>
+                  <Input name="list-ncc" value={1} type="radio" /> 111
+                </Label>
+              </div>
+              <div>
+                <Label check>
+                  <Input name="list-ncc" value={1} type="radio" /> 111
+                </Label>
+              </div>
+              <div>
+                <Label check>
+                  <Input name="list-ncc" value={1} type="radio" /> 111
+                </Label>
+              </div> */}
+          </FormGroup>
+        </Col>
+        <Col sm="10">
+          {isLoading === false ? (
+            <LoadingBox />
+          ) : (
+            <Row >
+              {products?.map((item) => (
+                <Col key={item.id} md={6} sm={12} lg={3}>
+                  <Item item={item}></Item>
+                </Col>
+              ))}
+            </Row>
+          )}
+        </Col>
+      </Row>
+    </div>
   );
 };
 

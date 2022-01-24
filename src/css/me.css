@@ -1,5 +1,5 @@
 .login {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 2rem;
   border-radius: 5px;
   box-shadow: black 5px;
@@ -13,7 +13,29 @@
     text-align: center;
 }
   .image_Shipper {
+   background-image: linear-gradient(green, white);
+ position: relative;
+  }
+  .image_Shipper_img{
+    width: 60%;
+    position:absolute;
+    bottom: 0;
+    right: 20%;
+   
+  }
+    .image_Shipper_img_login{
     width: 50%;
+    position:absolute;
+    bottom: 0;
+   left: 20%;
+   
+  }
+  .input-feedback{
+    width: 350px;
+    height: 150px;
+  }
+  .Quan_Ly_Tai_Khoan{
+    text-align: center;
   }
 
   

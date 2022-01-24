@@ -20,8 +20,8 @@ function ListLeftMoney({value, rangeSelector, hanldeMoney}) {
                             />
                         </div>
                         <div id="amount">
-                            <input value={ChangeMoney(value[0])} type="text" name="first_price" className="first_price" />
-                            <input value={ChangeMoney(value[1])} type="text" name="last_price" className="last_price" />
+                            $<input value={ChangeMoney(value[0])} type="text" name="first_price" className="first_price" />-
+                            $<input value={ChangeMoney(value[1])} type="text" name="last_price" className="last_price" />
                             <button onClick={hanldeMoney} className="button-shop" type="submit">Lọc giá</button>
                         </div>
                     </div>

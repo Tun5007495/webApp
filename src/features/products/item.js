@@ -17,14 +17,14 @@ const Example = (Props) => {
         {/* <div className="icon-heart">
         <i className="fab fa-gratipay"></i>
       </div> */}
-        <div style={{ position: "absolute", bottom: 40, right: 0 }}>
-          <Rating number={(item.cost % 10) / 2}></Rating>
+        <div style={{ position: "absolute", bottom: 40, right: 15 }}>
+          <Rating number={(parseInt(item.giaSP) % 10) / 2}></Rating>
         </div>
 
-        <h6 style={{ position: "absolute", bottom: 10, left: 10 }}>
-          {item.ten || item.Ten}
+        <h6 style={{ position: "absolute", bottom: 10, left: 5 }}>
+          <div className="name">{item.ten || item.Ten}</div>
         </h6>
-        <p style={{ position: "absolute", right: 5, bottom: 0 }}>
+        <p style={{ position: "absolute", right: 15, bottom: 0 }}>
           ${item.giaSP || item.GiaSP}
         </p>
 

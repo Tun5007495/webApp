@@ -15,22 +15,25 @@ const handleOrder = ()=>{
   return (
     <div className="cart-order">
       <Row>
-        <Col  xs="3" sm={{  offset: 2 }} md={{  offset: 4 }}   lg={{  offset: 5 }}  
-            
-              
+        <Col xs="3" sm={{ offset: 1,size:12 }} md={{ offset: 1,size:6 }} lg={{size:7, offset: 1 }}>
+          <div>
+            <h4>
+              <p>Tổng thanh toán ({items.length} Sản phẩm):</p>
+            </h4>
+          </div>
+        </Col>
+        <Col>
+          <h4>
+            <b className="cart-priceOrder">₫{total}</b>
+          </h4>
+        </Col>
+        <Col>
+          <div>
+            <Button
+              className="cart-buttonBuy"
+              color="success"
+              onClick={handleOrder}
             >
-          <div>
-            <p>Tổng thanh toán ({items.length} Sản phẩm):</p>
-          </div>
-        </Col>
-        <Col>
-          <div>
-            <p className="cart-priceOrder">₫{total}</p>
-          </div>
-        </Col>
-        <Col>
-          <div>
-            <Button className="cart-buttonBuy" color="success" onClick={handleOrder}>
               Mua Hàng
             </Button>
           </div>
