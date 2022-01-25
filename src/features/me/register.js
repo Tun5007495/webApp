@@ -19,7 +19,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import loginApi from "../../api/userApi";
 import Cookies from "js-cookie";
-import ShipperImgae from "../../assets/Shipper.png";
+import ShipperImgae from "../../assets/shipper.png";
 // const uiConfig = {
 //   // Popup signin flow rather than redirect flow.
 //   signInFlow: "redirect",

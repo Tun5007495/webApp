@@ -17,7 +17,7 @@ import logo from "../../assets/logo192.png";
 // import { signIn } from "../../redux/auth";
 import loginApi from "../../api/userApi";
 import Cookies from "js-cookie";
-import ShipperImgae from "../../assets/Shipper.png"
+import ShipperImgae from "../../assets/shipper.png"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 {/* <ToastContainer />; */}
